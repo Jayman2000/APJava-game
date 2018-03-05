@@ -1,3 +1,7 @@
 #!/bin/bash
 
-javac src/*.java -d build
+if [ ! -d "build" ]; then
+    mkdir build
+fi
+
+javac -d build src/*.java
