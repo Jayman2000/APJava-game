@@ -8,6 +8,9 @@ public class Server
      *
      * Returns: What the client should draw, in the order the client should
      *          draw it.
+     * Exceptions: Throws a AssetsNeeded exception if the client needs to
+     *             send asset requests first (see getAssetRequests, and
+     *             sendAssets).
      *
      * Precondition(s) : None
      * Postcondition(s): All entities which respond to the player's input have
@@ -18,5 +21,16 @@ public class Server
     {
         // Stub
         return null;
+    }
+
+    public String[] getAssetRequests()
+    {
+        // Stub
+        return null;
+    }
+
+    public void sendAssets()
+    {
+        // Stub
     }
 }
