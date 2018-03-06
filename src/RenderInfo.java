@@ -7,12 +7,12 @@ import java.awt.Image;
 
 public class RenderInfo
 {
-    public final double x, y;
-    public final Image toDraw;
+    final public double x, y;
+    final public Image sprite;
 
     public RenderInfo(Image toDraw, double x, double y)
     {
-        this.toDraw = toDraw;
+        sprite = toDraw;
         this.x = x;
         this.y = y;
     }

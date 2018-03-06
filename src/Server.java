@@ -1,3 +1,5 @@
+import java.awt.Image;
+
 public class Server
 {
     /* Runs one 'tic' of game logic.
@@ -13,6 +15,8 @@ public class Server
      * Postcondition(s): All entities which respond to the player's input have
      *                   been informed of the input, and all game state has
      *                   been updated for deltaTime milliseconds of game play.
+     *
+     * Author(s): None (stub)
      */
     public RenderInfo[] update(Object[] inputSignals, int deltaTime)
     {
