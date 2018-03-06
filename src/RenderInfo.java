@@ -8,11 +8,11 @@ import java.awt.Image;
 public class RenderInfo
 {
     final public double x, y;
-    final public Image toDraw;
+    final public Image sprite;
 
     public RenderInfo(Image toDraw, double x, double y)
     {
-        this.toDraw = toDraw;
+        sprite = toDraw;
         this.x = x;
         this.y = y;
     }

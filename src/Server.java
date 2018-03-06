@@ -1,3 +1,5 @@
+import java.awt.Image;
+
 public class Server
 {
     /* Runs one 'tic' of game logic.
@@ -8,29 +10,17 @@ public class Server
      *
      * Returns: What the client should draw, in the order the client should
      *          draw it.
-     * Exceptions: Throws a AssetsNeeded exception if the client needs to
-     *             send asset requests first (see getAssetRequests, and
-     *             sendAssets).
      *
      * Precondition(s) : None
      * Postcondition(s): All entities which respond to the player's input have
      *                   been informed of the input, and all game state has
      *                   been updated for deltaTime milliseconds of game play.
+     *
+     * Author(s): None (stub)
      */
     public RenderInfo[] update(Object[] inputSignals, int deltaTime)
     {
         // Stub
         return null;
-    }
-
-    public String[] getAssetRequests()
-    {
-        // Stub
-        return null;
-    }
-
-    public void sendAssets()
-    {
-        // Stub
     }
 }
