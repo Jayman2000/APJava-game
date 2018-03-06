@@ -7,8 +7,8 @@ import java.awt.Image;
 
 public class RenderInfo
 {
-    final public double x, y;
-    final public Image toDraw;
+    public final double x, y;
+    public final Image toDraw;
 
     public RenderInfo(Image toDraw, double x, double y)
     {
