@@ -1,0 +1,2 @@
+Files which wont be included when we hand in the final project:
+    JavaArcade.java
