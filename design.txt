@@ -1,0 +1,89 @@
+Game.java:
+
+Game is our main class. It extends JPanel and implements JavaArcade. It has
+many jobs, which can be split into the following categories. These categories
+can be actual classes or namespaces in the code, or they can simply be sections
+of code divided up using comments. For the sake of this document, I will refer
+to them as if they are proper namespaces.
+
+Input:
+    - JavaArcade interface
+    - Keyboard
+Output:
+    - JavaArcade interface
+    - Visual (via the methods we inherited via JPanel).
+    - Audio
+Processing:
+    - Ticker
+    - GameLogic
+    - AssetManager
+
+                                     Input
+Input.JavaArcade's job is to properly implement the methods from JavaArcade
+that correspond to user input, and inform Processing.GameLogic that those
+messeges were recived.
+
+Input.Keyboard's job is to take keyboard input.
+
+Bind:
+    key
+
+    pressedSignal - sent once when the key is first pushed down
+    downSignal - sent continuously while the key is down
+
+    press()
+    release()
+    getSignal()
+
+Input.Keyboard:
+    addBind(bind)
+    getSignals() - for every bind that has been added, return the signals that
+                   it's sending.
+
+                                    Output
+Output.JavaArcade's job is to properly implement the methods from JavaArcade
+that return data.
+
+Output.Visual's job is to draw the RenderInfos from Processing.GameLogic.
+
+RenderInfo:
+    double x, y (location of the bottom left corner of sprite, using
+                 Processing.GameLogic's coordinate system)
+    sprite
+
+Output.Visual:
+    draw(renderInfos):
+        for renderInfo in renderInfos:
+            convert coordinates to JPanel's coordinate system
+            draw the sprite
+
+Output.Audio's job is to play any AudioInfos that Processing.GameLogic is
+sending.
+
+AudioInfo:
+    sound
+    boolean loop (If false, play the sound once. If true, play it on loop)
+    boolean start (If false, stop playing a sound that is already playing,
+                   If true, start playing the sound).
+
+Output.Audio
+    play(AudioInfo)
+
+                                  Processing
+Processing.Ticker's job is to periodically check for input form Input.Keyboard,
+forward Input's signals to Processing.GameLogic, and forward
+Processing.GameLogic's RenderInfos and AudioInfos to Output.Visual and
+Output.Audio respectively.
+
+Processing.GameLogic's job is to keep track of the state of all entities, to
+update their state based on the user's inputs (sent to it from Input via
+Processing.Ticker) and the passage of time (as reported by Processing.Ticker),
+and to send all of the RenderInfos that Renderables produce back to Game to be
+drawn.
+
+Processing.AssetManager allows entites to request that sprites, and audio files
+be loaded. It will be constructed in Game, and be passed to all Renderables.
+
+Processing.AssetManager:
+    Image loadSprite()
+    Audio loadAudio()
