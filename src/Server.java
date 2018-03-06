@@ -1,6 +1,3 @@
- /* Author: Jason Yundt
-  */
-
 public class Server
 {
     /* Runs one 'tic' of game logic.

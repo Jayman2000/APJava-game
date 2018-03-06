@@ -1,6 +1,3 @@
-/* Author: Jason Yundt
- */
-
 import javax.swing.JPanel;
 
 public class Game extends JPanel implements JavaArcade
