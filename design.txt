@@ -46,10 +46,12 @@ that return data.
 
 Output.Visual's job is to draw the RenderInfos from Processing.GameLogic.
 
-RenderInfo:
+RenderInfo (abstract):
     double x, y (location of the bottom left corner of sprite, using
                  Processing.GameLogic's coordinate system)
     sprite
+
+SwingRendeInfo is the implementation of RenderInfo that we'll be using.
 
 Output.Visual:
     draw(renderInfos):
@@ -57,17 +59,10 @@ Output.Visual:
             convert coordinates to JPanel's coordinate system
             draw the sprite
 
-Output.Audio's job is to play any AudioInfos that Processing.GameLogic is
-sending.
-
-AudioInfo:
-    sound
-    boolean loop (If false, play the sound once. If true, play it on loop)
-    boolean start (If false, stop playing a sound that is already playing,
-                   If true, start playing the sound).
+Output.Audio's job is to play any audio that Game.GameLogic is sending.
 
 Output.Audio
-    play(AudioInfo)
+    play(Object toPlay)
 
                                   Processing
 Processing.Ticker's job is to periodically check for input form Input.Keyboard,
@@ -89,3 +84,24 @@ be loaded. It will be constructed in Game, and be passed to all Renderables.
 Processing.AssetManager:
     Image loadSprite()
     Audio loadAudio()
+
+Tests:
+
+TestUI provides a testing environment for classes which implement JavaArcade.
+NullGame is a simple example JavaArcade game which does nothing.
+
+Math:
+
+Vector2 is a class which represents a 2D vector. It will be used for physics
+calculations.
+
+Shape is a generic super class for collision detection
+
+Shape:
+    isTouching(shape other) - returns weahter or not this's area/perimeter
+                              share one or more points with other's
+                              area/perimeter.
+
+Not all shapes will necessarily be able to test for collisions with each other.
+If collision detection isn't implemented for a specific Shape, then an
+exception will be thrown.

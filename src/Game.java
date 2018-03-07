@@ -2,27 +2,40 @@ import javax.swing.JPanel;
 
 public class Game extends JPanel implements JavaArcade
 {
-    // JavaArcade interface
+    // Input
+    //  JavaArcade
+    public void startGame()
+    {
+        // Stub
+    }
+
+    public void pauseGame()
+    {
+        // Stub
+    }
+
+    public void stopGame()
+    {
+        // Stub
+    }
+
+
+    //  Keyboard
+
+
+
+    // Output
+    //  JavaArcade
     public boolean running()
     {
         // Stub
         return false;
     }
 
-    public void startGame()
-    {
-        // Stub
-    }
-
     public String getGameName()
     {
         // Stub
         return null;
-    }
-
-    public void pauseGame()
-    {
-
     }
 
     public String getInstructions()
@@ -43,26 +56,26 @@ public class Game extends JPanel implements JavaArcade
         return null;
     }
 
-    public void stopGame()
-    {
-        // Stub
-    }
-
     public int getPoints()
     {
         // Stub
         return 0;
     }
 
-    // Settings (constants)
 
-    // Input
-    // Keyboard
+    //  Visual
 
-    // Output
-    // Visual
 
-    // Audio
+    //  Audio
 
-    // Main loop/algorithm
+
+
+    // Processing
+    //  Ticker
+
+
+    //  GameLogic
+
+
+    //  AssetManager
 }
