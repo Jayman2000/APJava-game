@@ -79,7 +79,9 @@ Processing.GameLogic's job is to keep track of the state of all entities, to
 update their state based on the user's inputs (sent to it from Input via
 Processing.Ticker) and the passage of time (as reported by Processing.Ticker),
 and to send all of the RenderInfos that Renderables produce back to Game to be
-drawn.
+drawn. GameLogic will use doubles to represent coordinates, and will have its
+origin in the lower left corner (i.e., increasing x moves right, and increasing
+y moves up).
 
 Processing.AssetManager allows entites to request that sprites, and audio files
 be loaded. It will be constructed in Game, and be passed to all Renderables.
