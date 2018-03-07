@@ -36,7 +36,7 @@ public class Vector2
         return "(" + x + ", " + y + ")";
     }
 
-    // Tests for this class (probally should be commented out in the final build
+    // Tests for this class (probally should be commented out in the final build).
     public static void main(String[] args)
     {
         // Test data is from https://www.mathsisfun.com/algebra/vectors.html
