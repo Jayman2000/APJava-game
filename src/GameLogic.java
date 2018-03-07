@@ -1,6 +1,6 @@
 import java.awt.Image;
 
-public class Server
+public class GameLogic
 {
     /* Runs one 'tic' of game logic.
      *
@@ -18,7 +18,7 @@ public class Server
      *
      * Author(s): None (stub)
      */
-    public RenderInfo[] update(Object[] inputSignals, int deltaTime)
+    public OutputInfo update(Object[] inputSignals, int deltaTime)
     {
         // Stub
         return null;

@@ -5,15 +5,15 @@
 
 import java.awt.Image;
 
-public class RenderInfo
+public abstract class RenderInfo
 {
-    final public double x, y;
-    final public Image sprite;
+    protected abstract void setX(double x);
+    protected abstract void setY(double y);
+    public abstract Object getSprite(); // Returns the 2D image to be drawn
 
-    public RenderInfo(Image toDraw, double x, double y)
+    public RenderInfo(double x, double y)
     {
-        sprite = toDraw;
-        this.x = x;
-        this.y = y;
+        setX(x);
+        setY(y);
     }
 }
