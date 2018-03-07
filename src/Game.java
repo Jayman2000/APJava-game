@@ -1,7 +1,12 @@
 import java.awt.Image;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
+import java.util.ArrayList;
+
 import javax.swing.JPanel;
 
-public class Game extends JPanel implements JavaArcade
+public class Game extends JPanel implements JavaArcade, KeyListener
 {
     // Input
     //  JavaArcade
@@ -22,7 +27,39 @@ public class Game extends JPanel implements JavaArcade
 
 
     //  Keyboard
+    private ArrayList<Bind> binds;
 
+    public Object[] getSignals()
+    {
+        for(Bind b : binds)
+        {
+            b.getSignals();
+        }
+        return null;
+    }
+
+    // Methods required by KeyListener
+    public void keyTyped(KeyEvent e) { /* Intentiorally left empty */ }
+    public void keyPressed(KeyEvent e)
+    {
+        for(Bind b : binds)
+        {
+            if(b.key == e.getKeyCode())
+            {
+                b.press();
+            }
+        }
+    }
+    public void keyReleased(KeyEvent e)
+    {
+        for(Bind b : binds)
+        {
+            if(b.key == e.getKeyCode())
+            {
+                b.release();
+            }
+        }
+    }
 
 
     // Output
@@ -95,5 +132,11 @@ public class Game extends JPanel implements JavaArcade
     {
         // Stub
         return null;
+    }
+
+    public Game()
+    {
+        binds = new ArrayList<Bind>();
+        binds.add(new Bind(KeyEvent.VK_A, null, null));
     }
 }
