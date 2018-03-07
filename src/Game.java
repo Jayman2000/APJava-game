@@ -1,3 +1,4 @@
+import java.awt.Image;
 import javax.swing.JPanel;
 
 public class Game extends JPanel implements JavaArcade
