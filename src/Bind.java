@@ -23,7 +23,7 @@ public class Bind
 
     public void press()
     {
-        if (!down)
+        if(!down)
         {
             down = true;
             justPressed = true;
@@ -40,11 +40,11 @@ public class Bind
     {
         ArrayList<Object> ret = new ArrayList<Object>(2);
 
-        if (down)
+        if(down)
         {
             ret.add(downSignal);
         }
-        if (justPressed)
+        if(justPressed)
         {
             ret.add(pressedSignal);
             justPressed = false;

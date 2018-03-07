@@ -44,7 +44,7 @@ public class Vector2
         final int TIMES = 100; // Times to do recurring tests
 
         // Constructor
-        for (int i = 0; i < TIMES; i++)
+        for(int i = 0; i < TIMES; i++)
         {
             double x = randomCoordinate();
             double y = randomCoordinate();
