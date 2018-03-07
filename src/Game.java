@@ -78,4 +78,21 @@ public class Game extends JPanel implements JavaArcade
 
 
     //  AssetManager
+
+    // Returns a new image that can be used in SwingRenderInfos.
+    public static Image loadSprite(String name)
+    {
+        // Stub
+        return null;
+    }
+
+    /* Returns a new SwingRenderInfo. This is needed for polymorphism. If we
+     * were to switch render backends (from swing to something else), this
+     * would make it so we don't have to change code in every Renderable.
+     */
+    public static RenderInfo newRenderInfo(Object sprite)
+    {
+        // Stub
+        return null;
+    }
 }
