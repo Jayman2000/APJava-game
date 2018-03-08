@@ -1,7 +1,12 @@
-public class Circle extends Shape
+/* Used for collision detection.
+ *
+ * Author: Jason Yundt
+ */
+
+public class Circle
 {
-    private double radius;
-    private double centerX, centerY;
+    private final double radius;
+    private final double centerX, centerY;
 
     public Circle(double x, double y, double radius)
     {
@@ -25,17 +30,12 @@ public class Circle extends Shape
         return radius;
     }
 
-    public boolean isTouching(Shape other)
+    public boolean isTouching(Circle other)
     {
-        if(other instanceof Circle)
-        {
-            Circle c1 = this;
-            Circle c2 = (Circle)other;
+        double dx = other.getX() - this.getX(); // Delta x
+        double dy = other.getY() - this.getY(); // Delta y
 
-            double d = distance(c1.getX(), c1.getY(), c2.getX(), c2.getY());
-            return d <= c1.getRadius() + c2.getRadius();
-        }
-
-        return false; // Should be replaced with raising an exception
+        double d = Math.hypot(dx, dy); // distance between the two centers
+        return d <= this.getRadius() + other.getRadius();
     }
 }
