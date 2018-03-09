@@ -1,13 +1,12 @@
-/* Represents a 2D vector for physics calculations. This class is immuteable,
- * so all operations (add, subtract, etc.) return a new Vector2.
+/* Represents a 2D vector for physics calculations.
  *
  * Author: Jason Yundt
  */
 
 public class Vector2
 {
-    public final double x; // Horizontal component
-    public final double y; // Vertical component
+    private double x; // Horizontal component
+    private double y; // Vertical component
 
     public Vector2(double x, double y)
     {
@@ -15,20 +14,44 @@ public class Vector2
         this.y = y;
     }
 
-    /* Adds this to other.
+    // Getters and setters
+    public double getX()
+    {
+        return x;
+    }
+
+    public double getY()
+    {
+        return y;
+    }
+
+    public void setX(double x)
+    {
+        this.x = x;
+    }
+
+    public void setY(double y)
+    {
+        this.y = y;
+    }
+
+    /* Maker this = this + other.
      *
      * Precondition(s) : other is not null
      * Postcondition(s): None
      */
-    public Vector2 add(Vector2 other)
+    public void add(Vector2 other)
     {
-        return new Vector2(this.x + other.x, this.y + other.y);
+        x += other.getX();
+        y += other.getY();
     }
 
+
     // Scales this vector by scalar.
-    public Vector2 scl(double scalar)
+    public void scl(double scalar)
     {
-        return new Vector2(scalar * x, scalar * y);
+        x *= scalar;
+        y *= scalar;
     }
 
     public String toString()
@@ -58,17 +81,17 @@ public class Vector2
             Vector2 a = new Vector2(8,13);
             Vector2 b = new Vector2(26,7);
 
-            Vector2 c = a.add(b);
-            if (c.x !=34 || c.y != 20)
+            a.add(b);
+            if (a.getX() !=34 || a.getY() != 20)
                 System.out.println("ERROR: a + b != c");
         }
 
         // Multiplication by a scalar
         {
             Vector2 m = new Vector2(7,3);
-            Vector2 a = m.scl(3);
+            m.scl(3);
 
-            if (a.x != 21 || a.y != 9)
+            if (m.x != 21 || m.y != 9)
                 System.out.println("ERROR: 3m != a");
         }
     }
