@@ -14,6 +14,11 @@ public class Vector2
         this.y = y;
     }
 
+    public Vector2(Vector2 toCopy)
+    {
+        this(toCopy.getX(), toCopy.getY());
+    }
+
     // Getters and setters
     public double getX()
     {
@@ -55,6 +60,12 @@ public class Vector2
         y += other.getY();
     }
 
+    public void sub(Vector2 other)
+    {
+        x -= other.getX();
+        y -= other.getY();
+    }
+
 
     // Scales this vector by scalar.
     public void scl(double scalar)
@@ -89,9 +100,20 @@ public class Vector2
         return magnitude() * other.magnitude() * Math.cos(angleBetween);
     }
 
-    public void reflect()
+    /* Reflect this off of the given normal. Formula from
+     * https://math.stackexchange.com/q/13263
+     *
+     * Precondition(s) : normal is not null
+     * Postcondition(s): this has been reflected off of a surface perpindicular
+     *                   to the normal.
+     */
+    public void reflect(Vector2 normal)
     {
+        normal = new Vector2(normal);
 
+        double scalar = 2 * (this.dot(normal));
+        normal.scl(scalar);
+        this.sub(normal);
     }
 
     public String toString()
