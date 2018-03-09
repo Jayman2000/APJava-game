@@ -35,7 +35,7 @@ public class Vector2
         this.y = y;
     }
 
-    /* Maker this = this + other.
+    /* Makes this = this + other.
      *
      * Precondition(s) : other is not null
      * Postcondition(s): None
