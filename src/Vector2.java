@@ -83,7 +83,15 @@ public class Vector2
      */
     public double dot(Vector2 other)
     {
-        return magnitude() * other.magnitude() * Math.cos(angle());
+        // Angle between the two vectors
+        double angleBetween = Math.abs(angle() - other.angle());
+
+        return magnitude() * other.magnitude() * Math.cos(angleBetween);
+    }
+
+    public void reflect()
+    {
+
     }
 
     public String toString()
