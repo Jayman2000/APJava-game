@@ -35,11 +35,20 @@ public class Vector2
         this.y = y;
     }
 
-    /* Makes this = this + other.
+    // Returns the length of this.
+    public double magnitude()
+    {
+        return Math.hypot(x, y);
+    }
+
+    /* Adds two vectors.
      *
      * Precondition(s) : other is not null
-     * Postcondition(s): None
+     * Postcondition(s): the tip of this has been transformed with a horizontal
+     *                   component of other's x-coordinate, and a vertical
+     *                   component of other's y-coordinate.
      */
+
     public void add(Vector2 other)
     {
         x += other.getX();
@@ -52,6 +61,29 @@ public class Vector2
     {
         x *= scalar;
         y *= scalar;
+    }
+
+    // Returns the angle formed by this and the top side of the positive x-axis
+    public double angle()
+    {
+        return Math.atan2(y, x);
+    }
+
+    // Scales this so that its magnitude is 1
+    public void normalize()
+    {
+        x = Math.cos(angle());
+        y = Math.sin(angle());
+    }
+
+    /* Returns the dot product of this and other.
+     *
+     * Precondition(s) : other is not null
+     * Postcondition(s): none
+     */
+    public double dot(Vector2 other)
+    {
+        return magnitude() * other.magnitude() * Math.cos(angle());
     }
 
     public String toString()
