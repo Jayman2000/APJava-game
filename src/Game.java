@@ -2,8 +2,12 @@ import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import java.io.File;
+import java.io.IOException;
+
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 public class Game extends JPanel implements JavaArcade, KeyListener
@@ -117,21 +121,25 @@ public class Game extends JPanel implements JavaArcade, KeyListener
 
     //  AssetManager
 
-    // Returns a new image that can be used in SwingRenderInfos.
-    public static Image loadSprite(String name)
+    public static Image loadSprite(String name) throws IOException
     {
-        // Stub
-        return null;
+        Image sprite = ImageIO.read(new File("assets/" + name));
+        return sprite;
     }
 
     /* Returns a new SwingRenderInfo. This is needed for polymorphism. If we
      * were to switch render backends (from swing to something else), this
      * would make it so we don't have to change code in every Renderable.
+     *
+     * Parameters: name - the path of the sprite to load, realitive to the
+     *                    asset directory.
+     *
+     * Return value: a SwingRenderInfo at (0.0, 0.0)
      */
-    public static RenderInfo newRenderInfo(Object sprite)
+    public static RenderInfo newRenderInfo(Image sprite, double x, double y)
     {
-        // Stub
-        return null;
+
+        return new SwingRenderInfo(sprite, x, y);
     }
 
     public Game()
