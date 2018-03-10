@@ -136,10 +136,10 @@ public class Game extends JPanel implements JavaArcade, KeyListener
      *
      * Return value: a SwingRenderInfo at (0.0, 0.0)
      */
-    public static RenderInfo newRenderInfo(Image sprite, double x, double y)
+    public static RenderInfo newRenderInfo(Object sprite, double x, double y)
     {
 
-        return new SwingRenderInfo(sprite, x, y);
+        return new SwingRenderInfo((Image)sprite, x, y);
     }
 
     public Game()
