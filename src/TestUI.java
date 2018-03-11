@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 
 class TestUI
 {
-    final static JavaArcade game = new NullGame();
+    final static JavaArcade game = new Game();
 
     public static void main(String[] args)
     {

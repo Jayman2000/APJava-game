@@ -1,3 +1,4 @@
+import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -117,8 +118,7 @@ public class Game extends JPanel implements JavaArcade, KeyListener
         g.drawRoundRect(70, 70, 50, 50, 40, 40);
         for(SwingRenderInfo r: renderInfos)
         {
-
-            g.drawImage(r.getSprite(), r.getX(), r.getY(), null);
+            g.drawImage(r.getSprite(), (int)r.getX(), (int)r.getY(), null);
         }
     }
 
@@ -167,6 +167,7 @@ public class Game extends JPanel implements JavaArcade, KeyListener
 
     public Game()
     {
+        renderInfos = new SwingRenderInfo[0];
         binds = new ArrayList<Bind>();
         binds.add(new Bind(KeyEvent.VK_A, null, null));
     }
