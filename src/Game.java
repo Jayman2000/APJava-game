@@ -106,7 +106,21 @@ public class Game extends JPanel implements JavaArcade, KeyListener
 
 
     //  Visual
+    private SwingRenderInfo[] renderInfos;
+    public void drawSprites(OutputInfo o)
+    {
+        renderInfos = (SwingRenderInfo[])o.visuals;
+    }
+    public void paintComponent(Graphics g)
+    {
+        g.drawRect(20, 20, 50, 50);
+        g.drawRoundRect(70, 70, 50, 50, 40, 40);
+        for(SwingRenderInfo r: renderInfos)
+        {
 
+            g.drawImage(r.getSprite(), r.getX(), r.getY(), null);
+        }
+    }
 
     //  Audio
 
