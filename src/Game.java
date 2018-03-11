@@ -127,6 +127,15 @@ public class Game extends JPanel implements JavaArcade, KeyListener
         return sprite;
     }
 
+    /* Note: apparently Image.getWidth() can return -1 if not all of the image
+     * has been loaded yet. How do we prevent that from happening?
+     */
+    public static int getWidthOfSprite(Object sprite)
+    {
+        Image spriteImage = (Image)sprite;
+        return spriteImage.getWidth(null);
+    }
+
     /* Returns a new SwingRenderInfo. This is needed for polymorphism. If we
      * were to switch render backends (from swing to something else), this
      * would make it so we don't have to change code in every Renderable.
