@@ -2,6 +2,8 @@ import java.awt.Image;
 
 public class GameLogic
 {
+    public final static int WIDTH  = 640;
+    public final static int HEIGHT = 360;
     /* Runs one 'tic' of game logic.
      *
      * Paramaters:

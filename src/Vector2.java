@@ -53,17 +53,25 @@ public class Vector2
      *                   component of other's x-coordinate, and a vertical
      *                   component of other's y-coordinate.
      */
+    public void add(double dx, double dy)
+    {
+        x += dx;
+        y += dy;
+    }
 
     public void add(Vector2 other)
     {
-        x += other.getX();
-        y += other.getY();
+        add(other.getX(), other.getY());
+    }
+
+    public void sub(double dx, double dy)
+    {
+        add(-dx, -dy);
     }
 
     public void sub(Vector2 other)
     {
-        x -= other.getX();
-        y -= other.getY();
+        sub(other.getX(), other.getY());
     }
 
 
@@ -110,6 +118,9 @@ public class Vector2
     public void reflect(Vector2 normal)
     {
         normal = new Vector2(normal);
+
+        if(normal.magnitude() != 1)
+            normal.normalize();
 
         double scalar = 2 * (this.dot(normal));
         normal.scl(scalar);
