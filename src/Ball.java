@@ -8,7 +8,7 @@ public class Ball extends Circle
 
     private final Object sprite;
 
-    public Ball(double centerX, double centerY, double vectorX, double vectorY) throws IOException
+    public Ball(double centerX, double centerY, double vectorX, double vectorY)
     {
         super(centerX, centerY, 0);
         sprite = Game.loadSprite("ball.png");
