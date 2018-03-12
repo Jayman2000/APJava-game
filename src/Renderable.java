@@ -1,5 +1,5 @@
 
 public interface Renderable
 {		
-	public RenderInfo[] getRenderInfo();
+    public RenderInfo[] getRenderInfo();
 }

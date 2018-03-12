@@ -1,5 +1,5 @@
 
 public interface Collidable extends Entity
 {
-	public boolean isColliding(Circle collidableOther);
+    public boolean isColliding(Circle collidableOther);
 }
