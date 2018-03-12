@@ -13,6 +13,13 @@ import javax.swing.JPanel;
 
 public class Game extends JPanel implements JavaArcade, KeyListener
 {
+    public Game()
+    {
+        renderInfos = new SwingRenderInfo[0];
+        binds = new ArrayList<Bind>();
+        binds.add(new Bind(KeyEvent.VK_A, null, null));
+    }
+
     // Input
     //  JavaArcade
     public void startGame()
@@ -163,12 +170,5 @@ public class Game extends JPanel implements JavaArcade, KeyListener
     {
 
         return new SwingRenderInfo((Image)sprite, x, y);
-    }
-
-    public Game()
-    {
-        renderInfos = new SwingRenderInfo[0];
-        binds = new ArrayList<Bind>();
-        binds.add(new Bind(KeyEvent.VK_A, null, null));
     }
 }
