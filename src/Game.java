@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -27,6 +28,7 @@ public class Game extends JPanel implements JavaArcade, KeyListener, ActionListe
         // Output
         //  Visual
         setPreferredSize(new Dimension(GameLogic.HEIGHT, GameLogic.WIDTH));
+        setBackground(Color.BLACK);
 
         renderInfos = new SwingRenderInfo[0];
 
@@ -136,8 +138,6 @@ public class Game extends JPanel implements JavaArcade, KeyListener, ActionListe
     private SwingRenderInfo[] renderInfos;
     public void paintComponent(Graphics g)
     {
-        g.drawRect(20, 20, 50, 50);
-        g.drawRoundRect(70, 70, 50, 50, 40, 40);
         for(SwingRenderInfo r: renderInfos)
         {
             g.drawImage(r.getSprite(), (int)r.getX(), (int)r.getY(), null);
