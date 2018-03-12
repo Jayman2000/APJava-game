@@ -175,7 +175,7 @@ public class Game extends JPanel implements JavaArcade, KeyListener, ActionListe
         Image sprite;
         try
         {
-            sprite = ImageIO.read(new File("assets/" + name));
+            sprite = ImageIO.read(new File("assets\\" + name));
             return sprite;
         }
         catch(IOException e)
