@@ -1,9 +1,19 @@
 import java.awt.Image;
 
+import java.io.IOException;
+
 public class GameLogic
 {
     public final static int WIDTH  = 640;
     public final static int HEIGHT = 360;
+
+    private Object testSprite;
+
+    public GameLogic()
+    {
+        testSprite = Game.loadSprite("tile.png");
+    }
+
     /* Runs one 'tic' of game logic.
      *
      * Paramaters:
@@ -22,7 +32,8 @@ public class GameLogic
      */
     public OutputInfo update(Object[] inputSignals, int deltaTime)
     {
-        // Stub
-        return null;
+        RenderInfo[] toDraw = new SwingRenderInfo[1];
+        toDraw[0] = Game.newRenderInfo(testSprite, 5, 5);
+        return new OutputInfo(toDraw);
     }
 }
