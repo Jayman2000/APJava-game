@@ -1,13 +1,12 @@
-/* Represents a 2D vector for physics calculations. This class is immuteable,
- * so all operations (add, subtract, etc.) return a new Vector2.
+/* Represents a 2D vector for physics calculations.
  *
  * Author: Jason Yundt
  */
 
 public class Vector2
 {
-    public final double x; // Horizontal component
-    public final double y; // Vertical component
+    private double x; // Horizontal component
+    private double y; // Vertical component
 
     public Vector2(double x, double y)
     {
@@ -15,66 +14,121 @@ public class Vector2
         this.y = y;
     }
 
-    /* Adds this to other.
-     *
-     * Precondition(s) : other is not null
-     * Postcondition(s): None
-     */
-    public Vector2 add(Vector2 other)
+    public Vector2(Vector2 toCopy)
     {
-        return new Vector2(this.x + other.x, this.y + other.y);
+        this(toCopy.getX(), toCopy.getY());
     }
 
-    // Scales this vector by scalar.
-    public Vector2 scl(double scalar)
+    // Getters and setters
+    public double getX()
     {
-        return new Vector2(scalar * x, scalar * y);
+        return x;
+    }
+
+    public double getY()
+    {
+        return y;
+    }
+
+    public void setX(double x)
+    {
+        this.x = x;
+    }
+
+    public void setY(double y)
+    {
+        this.y = y;
+    }
+
+    // Returns the length of this.
+    public double magnitude()
+    {
+        return Math.hypot(x, y);
+    }
+
+    /* Adds two vectors.
+     *
+     * Precondition(s) : other is not null
+     * Postcondition(s): the tip of this has been transformed with a horizontal
+     *                   component of other's x-coordinate, and a vertical
+     *                   component of other's y-coordinate.
+     */
+    public void add(double dx, double dy)
+    {
+        x += dx;
+        y += dy;
+    }
+
+    public void add(Vector2 other)
+    {
+        add(other.getX(), other.getY());
+    }
+
+    public void sub(double dx, double dy)
+    {
+        add(-dx, -dy);
+    }
+
+    public void sub(Vector2 other)
+    {
+        sub(other.getX(), other.getY());
+    }
+
+
+    // Scales this vector by scalar.
+    public void scl(double scalar)
+    {
+        x *= scalar;
+        y *= scalar;
+    }
+
+    // Returns the angle formed by this and the top side of the positive x-axis
+    public double angle()
+    {
+        return Math.atan2(y, x);
+    }
+
+    // Scales this so that its magnitude is 1
+    public void normalize()
+    {
+        x = Math.cos(angle());
+        y = Math.sin(angle());
+    }
+
+    /* Returns the dot product of this and other.
+     *
+     * Precondition(s) : other is not null
+     * Postcondition(s): none
+     */
+    public double dot(Vector2 other)
+    {
+        // Angle between the two vectors
+        double angleBetween = Math.abs(angle() - other.angle());
+
+        return magnitude() * other.magnitude() * Math.cos(angleBetween);
+    }
+
+    /* Reflect this off of the given normal. Formula from
+     * https://math.stackexchange.com/q/13263
+     *
+     * Precondition(s) : normal is not null
+     * Postcondition(s): this has been reflected off of a surface perpindicular
+     *                   to the normal.
+     */
+    public void reflect(Vector2 normal)
+    {
+        normal = new Vector2(normal);
+
+        if(normal.magnitude() != 1)
+            normal.normalize();
+
+        double scalar = 2 * (this.dot(normal));
+        normal.scl(scalar);
+        this.sub(normal);
     }
 
     public String toString()
     {
         return "(" + x + ", " + y + ")";
-    }
-
-    // Tests for this class (probally should be commented out in the final build).
-    public static void main(String[] args)
-    {
-        // Test data is from https://www.mathsisfun.com/algebra/vectors.html
-
-        final int TIMES = 100; // Times to do recurring tests
-
-        // Constructor
-        for(int i = 0; i < TIMES; i++)
-        {
-            double x = randomCoordinate();
-            double y = randomCoordinate();
-            Vector2 test = new Vector2(x, y);
-            if (test.x != x || test.y != y)
-                System.out.println("ERROR: new Vector2(" + x + ", " + y + ") != " + test);
-        }
-
-        // Addition
-        {
-            Vector2 a = new Vector2(8,13);
-            Vector2 b = new Vector2(26,7);
-
-            Vector2 c = a.add(b);
-            if (c.x !=34 || c.y != 20)
-                System.out.println("ERROR: a + b != c");
-        }
-
-        // Multiplication by a scalar
-        {
-            Vector2 m = new Vector2(7,3);
-            Vector2 a = m.scl(3);
-
-            if (a.x != 21 || a.y != 9)
-                System.out.println("ERROR: 3m != a");
-        }
-    }
-
-    static double randomCoordinate()
-    {
-        return Math.random() * 20 - 10;
     }
 }

@@ -1,8 +1,44 @@
+import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.Image;
-import javax.swing.JPanel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-public class Game extends JPanel implements JavaArcade
+import java.io.File;
+import java.io.IOException;
+
+import java.util.ArrayList;
+
+import javax.imageio.ImageIO;
+import javax.swing.JPanel;
+import javax.swing.Timer;
+
+public class Game extends JPanel implements JavaArcade, KeyListener, ActionListener
 {
+    public Game()
+    {
+        // Input
+        //  Keyboard
+        binds = new ArrayList<Bind>();
+        binds.add(new Bind(KeyEvent.VK_A, null, null));
+
+        // Output
+        //  Visual
+        setPreferredSize(new Dimension(GameLogic.HEIGHT, GameLogic.WIDTH));
+
+        renderInfos = new SwingRenderInfo[0];
+
+        // Processing
+        //  Ticker
+        timer = new Timer((int)Math.round(1.0/24.0 * 1000), this);
+        timer.start();
+
+        //  GameLogic
+        server = new GameLogic();
+    }
+
     // Input
     //  JavaArcade
     public void startGame()
@@ -22,7 +58,39 @@ public class Game extends JPanel implements JavaArcade
 
 
     //  Keyboard
+    private ArrayList<Bind> binds;
 
+    public Object[] getSignals()
+    {
+        for(Bind b : binds)
+        {
+            b.getSignals();
+        }
+        return null;
+    }
+
+    // Methods required by KeyListener
+    public void keyTyped(KeyEvent e) { /* Intentiorally left empty */ }
+    public void keyPressed(KeyEvent e)
+    {
+        for(Bind b : binds)
+        {
+            if(b.key == e.getKeyCode())
+            {
+                b.press();
+            }
+        }
+    }
+    public void keyReleased(KeyEvent e)
+    {
+        for(Bind b : binds)
+        {
+            if(b.key == e.getKeyCode())
+            {
+                b.release();
+            }
+        }
+    }
 
 
     // Output
@@ -65,35 +133,82 @@ public class Game extends JPanel implements JavaArcade
 
 
     //  Visual
-
+    private SwingRenderInfo[] renderInfos;
+    public void paintComponent(Graphics g)
+    {
+        g.drawRect(20, 20, 50, 50);
+        g.drawRoundRect(70, 70, 50, 50, 40, 40);
+        for(SwingRenderInfo r: renderInfos)
+        {
+            g.drawImage(r.getSprite(), (int)r.getX(), (int)r.getY(), null);
+        }
+    }
 
     //  Audio
 
 
-
     // Processing
     //  Ticker
+    private Timer timer;
+
+    // Called every tic
+    public void actionPerformed(ActionEvent e)
+    {
+        OutputInfo result = server.update(null, timer.getDelay());
+        if(result.visuals != null)
+        {
+            renderInfos = new SwingRenderInfo[result.visuals.length];
+            for(int i = 0; i < result.visuals.length; i++)
+                renderInfos[i] = (SwingRenderInfo)result.visuals[i];
+        }
+    }
 
 
     //  GameLogic
+    private GameLogic server;
 
 
     //  AssetManager
 
-    // Returns a new image that can be used in SwingRenderInfos.
     public static Image loadSprite(String name)
     {
-        // Stub
+        Image sprite;
+        try
+        {
+            sprite = ImageIO.read(new File("assets/" + name));
+            return sprite;
+        }
+        catch(IOException e)
+        {
+            System.out.println("FATAL: Could not load sprite \"" + name + "\".");
+        }
+
+        System.exit(0);
+        // This can never happen, but is needed prevent a compiler error.
         return null;
+    }
+
+    /* Note: apparently Image.getWidth() can return -1 if not all of the image
+     * has been loaded yet. How do we prevent that from happening?
+     */
+    public static int getWidthOfSprite(Object sprite)
+    {
+        Image spriteImage = (Image)sprite;
+        return spriteImage.getWidth(null);
     }
 
     /* Returns a new SwingRenderInfo. This is needed for polymorphism. If we
      * were to switch render backends (from swing to something else), this
      * would make it so we don't have to change code in every Renderable.
+     *
+     * Parameters: name - the path of the sprite to load, realitive to the
+     *                    asset directory.
+     *
+     * Return value: a SwingRenderInfo at (0.0, 0.0)
      */
-    public static RenderInfo newRenderInfo(Object sprite)
+    public static RenderInfo newRenderInfo(Object sprite, double x, double y)
     {
-        // Stub
-        return null;
+
+        return new SwingRenderInfo((Image)sprite, x, y);
     }
 }
