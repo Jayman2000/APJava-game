@@ -1,10 +1,5 @@
 
-public class Renderable
-{
-	private RenderInfo[] images;
-			
-	RenderInfo[] getRenderInfo()
-	{
-		return images;
-	}
+public interface Renderable
+{		
+	public RenderInfo[] getRenderInfo();
 }
