@@ -2,6 +2,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -138,6 +139,7 @@ public class Game extends JPanel implements JavaArcade, KeyListener, ActionListe
     private SwingRenderInfo[] renderInfos;
     public void paintComponent(Graphics g)
     {
+        super.paintComponent(g);
         for(SwingRenderInfo r: renderInfos)
         {
             g.drawImage(r.getSprite(), (int)r.getX(), (int)r.getY(), null);
@@ -161,6 +163,11 @@ public class Game extends JPanel implements JavaArcade, KeyListener, ActionListe
             for(int i = 0; i < result.visuals.length; i++)
                 renderInfos[i] = (SwingRenderInfo)result.visuals[i];
         }
+
+        repaint();
+        // Work arround from https://stackoverflow.com/questions/33257540/java-window-lagging-on-ubuntu-but-not-windows-when-code-isnt-lagging#33258929
+        if(System.getProperty("os.name").equals("Linux"))
+            Toolkit.getDefaultToolkit().sync();
     }
 
 

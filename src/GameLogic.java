@@ -7,11 +7,11 @@ public class GameLogic
     public final static int WIDTH  = 640;
     public final static int HEIGHT = 360;
 
-    private Object testSprite;
+    private Ball ball;
 
     public GameLogic()
     {
-        testSprite = Game.loadSprite("tile.png");
+        ball = new Ball(WIDTH/2.0, HEIGHT/2.0, 1, 1);
     }
 
     /* Runs one 'tic' of game logic.
@@ -32,8 +32,10 @@ public class GameLogic
      */
     public OutputInfo update(Object[] inputSignals, int deltaTime)
     {
+        ball.update(deltaTime);
+
         RenderInfo[] toDraw = new SwingRenderInfo[1];
-        toDraw[0] = Game.newRenderInfo(testSprite, 5, 5);
+        toDraw[0] = ball.getRenderInfo();
         return new OutputInfo(toDraw);
     }
 }

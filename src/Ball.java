@@ -4,11 +4,11 @@ public class Ball extends Circle
 {
     private Vector2 velocity; // Measured in units/ms
     private static final Vector2 GRAVITY = new Vector2(0, -0.01); // Aceleration due to gravity in units/ms^2
-    private static final double FRICTION = 0.9; // in portion remaining after 1 ms
+    private static final double FRICTION = 0.9999; // in portion remaining after 1 ms
 
     private final Object sprite;
 
-    public Ball(double centerX, double centerY, double vectorX, double vectorY) throws IOException
+    public Ball(double centerX, double centerY, double vectorX, double vectorY)
     {
         super(centerX, centerY, 0);
         sprite = Game.loadSprite("yin-yang1.png");
