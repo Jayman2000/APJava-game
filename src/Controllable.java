@@ -1,5 +1,5 @@
 
 public interface Controllable
 {
-	void sendInputs(Object[] signals);
+	public void sendInputs(Object[] signals);
 }
