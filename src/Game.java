@@ -2,6 +2,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -164,6 +165,9 @@ public class Game extends JPanel implements JavaArcade, KeyListener, ActionListe
         }
 
         repaint();
+        // Work arround from https://stackoverflow.com/questions/33257540/java-window-lagging-on-ubuntu-but-not-windows-when-code-isnt-lagging#33258929
+        if(System.getProperty("os.name").equals("Linux"))
+            Toolkit.getDefaultToolkit().sync();
     }
 
 
