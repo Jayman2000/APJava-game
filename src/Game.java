@@ -138,6 +138,7 @@ public class Game extends JPanel implements JavaArcade, KeyListener, ActionListe
     private SwingRenderInfo[] renderInfos;
     public void paintComponent(Graphics g)
     {
+        super.paintComponent(g);
         for(SwingRenderInfo r: renderInfos)
         {
             g.drawImage(r.getSprite(), (int)r.getX(), (int)r.getY(), null);
@@ -161,6 +162,8 @@ public class Game extends JPanel implements JavaArcade, KeyListener, ActionListe
             for(int i = 0; i < result.visuals.length; i++)
                 renderInfos[i] = (SwingRenderInfo)result.visuals[i];
         }
+
+        repaint();
     }
 
 
