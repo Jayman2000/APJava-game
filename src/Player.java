@@ -1,5 +1,3 @@
-import java.io.IOException;
-
 public class Player implements Renderable
 {
     private static final int SPEED = 5;
