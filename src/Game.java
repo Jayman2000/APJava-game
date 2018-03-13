@@ -19,12 +19,12 @@ import javax.swing.Timer;
 
 public class Game extends JPanel implements JavaArcade, KeyListener, ActionListener
 {
+    private final static int frameTime = (int)Math.round(1.0/24.0 * 1000); // 24 fps
     public Game()
     {
         // Input
         //  Keyboard
         binds = new ArrayList<Bind>();
-        binds.add(new Bind(KeyEvent.VK_A, null, null));
 
         // Output
         //  Visual
@@ -35,7 +35,7 @@ public class Game extends JPanel implements JavaArcade, KeyListener, ActionListe
 
         // Processing
         //  Ticker
-        timer = new Timer((int)Math.round(1.0/24.0 * 1000), this);
+        timer = new Timer(frameTime, this);
 
         //  GameLogic
         server = new GameLogic();
@@ -158,12 +158,10 @@ public class Game extends JPanel implements JavaArcade, KeyListener, ActionListe
     public void actionPerformed(ActionEvent e)
     {
         OutputInfo result = server.update(null, timer.getDelay());
-        if(result.visuals != null)
-        {
-            renderInfos = new SwingRenderInfo[result.visuals.length];
-            for(int i = 0; i < result.visuals.length; i++)
-                renderInfos[i] = (SwingRenderInfo)result.visuals[i];
-        }
+
+        renderInfos = new SwingRenderInfo[result.visuals.length];
+        for(int i = 0; i < result.visuals.length; i++)
+            renderInfos[i] = (SwingRenderInfo)result.visuals[i];
 
         repaint();
         // Work arround from https://stackoverflow.com/questions/33257540/java-window-lagging-on-ubuntu-but-not-windows-when-code-isnt-lagging#33258929

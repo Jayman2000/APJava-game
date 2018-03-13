@@ -9,12 +9,16 @@ public class GameLogic
     public final static int WIDTH  = 640;
     public final static int HEIGHT = 360;
 
-    private ArrayList<Renderable> toDraw; // Will be drawn on every call to update
+    private ArrayList<Renderable> renderables; // Will be drawn on every call to update
+    private ArrayList<Entity> entities;
 
     public GameLogic()
     {
-        toDraw = new ArrayList<Renderable>();
-        toDraw.add(new Player());
+        entities = new ArrayList<Entity>();
+        entities.add(new Ball(WIDTH/2.0, HEIGHT/2.0, 1, 1));
+
+        renderables = new ArrayList<Renderable>();
+        renderables.add(new Player());
     }
 
     /* Runs one 'tic' of game logic.
@@ -35,16 +39,30 @@ public class GameLogic
      */
     public OutputInfo update(Object[] inputSignals, int deltaTime)
     {
-        ArrayList<RenderInfo> retVisuals = new ArrayList<RenderInfo>(toDraw.size());
-
-        for(Renderable r : toDraw)
+        // Update everything
+        for(Entity e : entities)
         {
-            for(RenderInfo toAdd : r.getRenderInfo())
-            {
-                retVisuals.add(toAdd);
-            }
+            e.update(deltaTime);
         }
 
+        // Create the OutputInfo to return
+        ArrayList<RenderInfo> retVisuals = new ArrayList<RenderInfo>(renderables.size());
+
+        // ArrayList.toArray requires an array of the right size to populate
+        addToRetVisuals(retVisuals, entities.toArray(new Renderable[entities.size()]));
+        addToRetVisuals(retVisuals, renderables.toArray(new Renderable[renderables.size()]));
+
         return new OutputInfo(retVisuals.toArray(new RenderInfo[retVisuals.size()]));
+    }
+
+    private static void addToRetVisuals(ArrayList<RenderInfo> retVisuals, Renderable[] toAdd)
+    {
+        for(Renderable r: toAdd)
+        {
+            for(RenderInfo info : r.getRenderInfo())
+            {
+                retVisuals.add(info);
+            }
+        }
     }
 }
