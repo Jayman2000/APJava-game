@@ -1,32 +1,42 @@
 import java.io.IOException;
 
 public class Player {
-    
+
     private static final int SPEED = 5;
     private double x = 0;
     private double y = 0;
     private Object sprite;
-    
-    public Player() throws IOException
+
+    public Player()
     {
-        sprite = Game.loadSprite();
+        sprite = Game.loadSprite("idle.png");
     }
-    
+
     public double getX()
     {
         return x;
     }
-    
+
     public double getY()
     {
         return y;
     }
-    
+
+    public void setX(double x)
+    {
+        this.x = x;
+    }
+
+    public void getY(double y)
+    {
+        this.y = y;
+    }
+
     public RenderInfo getRenderInfo()
     {
         return Game.newRenderInfo(sprite, getX(), getY());
     }
-    
+
     public void update(int deltaTime)
     {
         if(getX() < 0)
