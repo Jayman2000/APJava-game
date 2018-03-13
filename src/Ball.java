@@ -1,6 +1,6 @@
 import java.io.IOException;
 
-public class Ball extends Circle
+public class Ball extends Circle implements Entity
 {
     private Vector2 velocity; // Measured in units/ms
     private static final Vector2 GRAVITY = new Vector2(0, -0.01); // Aceleration due to gravity in units/ms^2
@@ -16,9 +16,11 @@ public class Ball extends Circle
         velocity = new Vector2(vectorX, vectorY);
     }
 
-    public RenderInfo getRenderInfo()
+    public RenderInfo[] getRenderInfo()
     {
-        return Game.newRenderInfo(sprite, getX(), getY());
+        RenderInfo[] ret = new RenderInfo[1];
+        ret[0] = Game.newRenderInfo(sprite, getX()-getRadius(), getY()-getRadius());
+        return ret;
     }
 
     // deltaTime is in ms
