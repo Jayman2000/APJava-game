@@ -29,14 +29,25 @@ public class SwingRenderInfo extends RenderInfo
         this.y = y;
     }
 
-    public double getX()
+    public int getX()
     {
-        return x;
+        return convertX(x);
     }
 
-    public double getY()
+    public int getY()
     {
-        return y;
+        return convertY(y);
+    }
+
+    // Converts GameLogic style coordinates to Swing style ones
+    private static int convertX(double x)
+    {
+        return (int)Math.round(x);
+    }
+
+    private static int convertY(double y)
+    {
+        return convertX(GameLogic.HEIGHT - y);
     }
 
 

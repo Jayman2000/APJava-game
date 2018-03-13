@@ -142,7 +142,7 @@ public class Game extends JPanel implements JavaArcade, KeyListener, ActionListe
         super.paintComponent(g);
         for(SwingRenderInfo r: renderInfos)
         {
-            g.drawImage(r.getSprite(), (int)r.getX(), (int)r.getY(), null);
+            g.drawImage(r.getSprite(), r.getX(), r.getY(), null);
         }
     }
 
@@ -182,7 +182,7 @@ public class Game extends JPanel implements JavaArcade, KeyListener, ActionListe
         Image sprite;
         try
         {
-            sprite = ImageIO.read(new File("assets\\" + name));
+            sprite = ImageIO.read(new File("assets", name));
             return sprite;
         }
         catch(IOException e)
