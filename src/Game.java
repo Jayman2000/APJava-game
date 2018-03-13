@@ -188,9 +188,9 @@ public class Game extends JPanel implements JavaArcade, KeyListener, ActionListe
         catch(IOException e)
         {
             System.out.println("FATAL: Could not load sprite \"" + name + "\".");
+            System.exit(0);
         }
 
-        System.exit(0);
         // This can never happen, but is needed prevent a compiler error.
         return null;
     }
