@@ -4,7 +4,7 @@ public class Ball extends Circle
 {
     private Vector2 velocity; // Measured in units/ms
     private static final Vector2 GRAVITY = new Vector2(0, -0.01); // Aceleration due to gravity in units/ms^2
-    private static final double FRICTION = 0.9999; // in portion remaining after 1 ms
+    private static final double FRICTION = 0.9999; // portion of velocity remaining after 1 ms
 
     private final Object sprite;
 
