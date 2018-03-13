@@ -36,10 +36,11 @@ public class Game extends JPanel implements JavaArcade, KeyListener, ActionListe
         // Processing
         //  Ticker
         timer = new Timer((int)Math.round(1.0/24.0 * 1000), this);
-        timer.start();
 
         //  GameLogic
         server = new GameLogic();
+
+        timer.start();
     }
 
     // Input
