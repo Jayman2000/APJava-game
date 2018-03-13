@@ -1,6 +1,6 @@
 import java.io.IOException;
 
-public class Player {
+public class Player implements Renderable {
 
     private static final int SPEED = 5;
     private double x = 0;
@@ -9,7 +9,7 @@ public class Player {
 
     public Player()
     {
-        sprite = Game.loadSprite("idle.png");
+        sprite = Game.loadSprite("idle-new.png");
     }
 
     public double getX()
@@ -32,9 +32,11 @@ public class Player {
         this.y = y;
     }
 
-    public RenderInfo getRenderInfo()
+    public RenderInfo[] getRenderInfo()
     {
-        return Game.newRenderInfo(sprite, getX(), getY());
+        RenderInfo[] ret = new RenderInfo[1];
+        ret[0] = Game.newRenderInfo(sprite, getX(), getY());
+        return ret;
     }
 
     public void update(int deltaTime)
