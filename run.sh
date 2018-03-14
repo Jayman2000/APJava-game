@@ -2,4 +2,4 @@
 
 ./build.sh
 cd build
-java TestUI
+java Arcade

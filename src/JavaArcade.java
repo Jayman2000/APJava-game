@@ -1,20 +1,48 @@
-public interface JavaArcade
-{
-    public boolean running();
+/**
+ * @(#)ArcadeFriendly.java
+ *
+ * All games must implement this interface to be compatible with the Java arcade.
+ *
+ * @author A. DiBenedetto
+ * @version 1.00 2016/2/15
+ */
 
-    public void startGame();
 
-    public String getGameName();
+public interface JavaArcade {
 
-    public void pauseGame();
+  /* This method should return true if your game is in a "start" state, it should return false if
+   * your game is in a "paused" state or "stopped" or "unstarted" */
 
-    public String getInstructions();
+  public boolean running();
 
-    public String getCredits();
+  /* This method should start your game, it should also set a global boolean value so that your running method
+   * can return the appropriate value */
 
-    public String getHighScore();
+  public void startGame();
 
-    public void stopGame();
+  /*This method should return the name of your game */
+  public String getGameName();
 
-    public int getPoints();
+  /* This method should stop your timers but save your score, it should set a boolean value to indicate
+   *the game is not running, this value will be returned by running method */
+
+  public void pauseGame();
+
+  /* This method should return your instructions */
+  public String getInstructions();
+
+ /* This method should return the author(s) of the game */
+
+  public String getCredits();
+
+  /* This method should return the highest score played for this game */
+  public String getHighScore();
+
+  /* This method should stop the timers, reset the score, and set a running boolean value to false */
+  public void stopGame();
+
+  /* This method shoud return the current players number of points */
+
+  public int getPoints(); //add to spec
+
 }
