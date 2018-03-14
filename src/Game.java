@@ -25,6 +25,9 @@ public class Game extends JPanel implements JavaArcade, KeyListener, ActionListe
         // Input
         //  Keyboard
         binds = new ArrayList<Bind>();
+        setFocusable(true);
+        addKeyListener(this);
+
 
         // Output
         //  Visual
@@ -39,6 +42,11 @@ public class Game extends JPanel implements JavaArcade, KeyListener, ActionListe
 
         //  GameLogic
         server = new GameLogic();
+
+        for(Bind b : server.getBinds())
+        {
+            binds.add(b);
+        }
 
         timer.start();
     }
@@ -66,11 +74,17 @@ public class Game extends JPanel implements JavaArcade, KeyListener, ActionListe
 
     public Object[] getSignals()
     {
+        ArrayList<Object> ret = new ArrayList<Object>(binds.size());
+
         for(Bind b : binds)
         {
-            b.getSignals();
+            for(Object signal : b.getSignals())
+            {
+                ret.add(signal);
+            }
         }
-        return null;
+
+        return ret.toArray(new Object[ret.size()]);
     }
 
     // Methods required by KeyListener
@@ -157,7 +171,7 @@ public class Game extends JPanel implements JavaArcade, KeyListener, ActionListe
     // Called every tic
     public void actionPerformed(ActionEvent e)
     {
-        OutputInfo result = server.update(null, timer.getDelay());
+        OutputInfo result = server.update(getSignals(), timer.getDelay());
 
         renderInfos = new SwingRenderInfo[result.visuals.length];
         for(int i = 0; i < result.visuals.length; i++)

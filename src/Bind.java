@@ -52,4 +52,11 @@ public class Bind
 
         return ret.toArray();
     }
+
+    public String toString()
+    {
+        return "Key: " + key + "\n" +
+               " Down signal: " + downSignal + "\n" +
+               " Pressed signal: " + pressedSignal;
+    }
 }

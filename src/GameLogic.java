@@ -7,16 +7,27 @@ public class GameLogic
     public final static int WIDTH  = 640;
     public final static int HEIGHT = 360;
 
-    private ArrayList<Renderable> renderables; // Will be drawn on every call to update
+    private ArrayList<Renderable> renderables;
     private ArrayList<Entity> entities;
+    private ArrayList<Controllable> controllables;
 
     public GameLogic()
     {
+        controllables = new ArrayList<Controllable>();
+        controllables.add(new Player());
+
         entities = new ArrayList<Entity>();
+        for(Entity e : controllables)
+        {
+            entities.add(e);
+        }
         entities.add(new Ball(WIDTH/2.0, HEIGHT/2.0, 1, 1));
 
         renderables = new ArrayList<Renderable>();
-        renderables.add(new Player());
+        for(Renderable r : entities)
+        {
+            renderables.add(r);
+        }
     }
 
     /* Runs one 'tic' of game logic.
@@ -29,6 +40,7 @@ public class GameLogic
      *          draw it.
      *
      * Precondition(s) : toDraw and all of its elements are not null.
+     *                   inputSignals is not null.
      * Postcondition(s): All entities which respond to the player's input have
      *                   been informed of the input, and all game state has
      *                   been updated for deltaTime milliseconds of game play.
@@ -37,6 +49,12 @@ public class GameLogic
      */
     public OutputInfo update(Object[] inputSignals, int deltaTime)
     {
+        // Send signals
+        for(Controllable c : controllables)
+        {
+            c.sendInputs(inputSignals);
+        }
+
         // Update everything
         for(Entity e : entities)
         {
@@ -46,21 +64,29 @@ public class GameLogic
         // Create the OutputInfo to return
         ArrayList<RenderInfo> retVisuals = new ArrayList<RenderInfo>(renderables.size());
 
-        // ArrayList.toArray requires an array of the right size to populate
-        addToRetVisuals(retVisuals, entities.toArray(new Renderable[entities.size()]));
-        addToRetVisuals(retVisuals, renderables.toArray(new Renderable[renderables.size()]));
-
-        return new OutputInfo(retVisuals.toArray(new RenderInfo[retVisuals.size()]));
-    }
-
-    private static void addToRetVisuals(ArrayList<RenderInfo> retVisuals, Renderable[] toAdd)
-    {
-        for(Renderable r: toAdd)
+        for(Renderable rend : renderables)
         {
-            for(RenderInfo info : r.getRenderInfo())
+            for(RenderInfo info : rend.getRenderInfo())
             {
                 retVisuals.add(info);
             }
         }
+
+        return new OutputInfo(retVisuals.toArray(new RenderInfo[retVisuals.size()]));
+    }
+
+    public Bind[] getBinds()
+    {
+        ArrayList<Bind> ret = new ArrayList<Bind>(controllables.size());
+
+        for(Controllable c : controllables)
+        {
+            for(Bind b : c.getBinds())
+            {
+                ret.add(b);
+            }
+        }
+
+        return ret.toArray(new Bind[ret.size()]);
     }
 }
