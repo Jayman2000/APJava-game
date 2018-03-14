@@ -3,5 +3,5 @@
 call build
 set current_dir=%cd%
 cd build
-java TestUI
+java Arcade
 cd %current_dir%
