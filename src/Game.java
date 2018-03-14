@@ -122,25 +122,25 @@ public class Game extends JPanel implements JavaArcade, KeyListener, ActionListe
     public String getGameName()
     {
         // Stub
-        return null;
+        return "";
     }
 
     public String getInstructions()
     {
         // Stub
-        return null;
+        return "";
     }
 
     public String getCredits()
     {
         // Stub
-        return null;
+        return "";
     }
 
     public String getHighScore()
     {
         // Stub
-        return null;
+        return "0";
     }
 
     public int getPoints()
