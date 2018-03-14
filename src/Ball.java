@@ -12,6 +12,7 @@ public class Ball extends Circle implements Entity
     {
         super(centerX, centerY, 0);
         sprite = Game.loadSprite("ball.png");
+        setRadius(Game.getWidthOfSprite(sprite)/2.0); // Assuming sprite is a square
 
         velocity = new Vector2(vectorX, vectorY);
     }
@@ -32,25 +33,25 @@ public class Ball extends Circle implements Entity
         setY(getY() + scaledVelocity.getY());
 
         // Bounce off of walls
-        if(getX() < 0)
+        if(getX()-getRadius() < 0)
         {
-            setX(0);
+            setX(getRadius());
             velocity.reflect(new Vector2(-1, 0));
         }
-        else if(getX() > GameLogic.WIDTH)
+        else if(getX()+getRadius() > GameLogic.WIDTH)
         {
-            setX(GameLogic.WIDTH);
+            setX(GameLogic.WIDTH-getRadius());
             velocity.reflect(new Vector2(1, 0));
         }
 
-        if(getY() < 0)
+        if(getY()-getRadius() < 0)
         {
-            setY(0);
+            setY(getRadius());
             velocity.reflect(new Vector2(0, -1));
         }
-        else if(getY() > GameLogic.HEIGHT)
+        else if(getY()+getRadius() > GameLogic.HEIGHT)
         {
-            setY(GameLogic.HEIGHT);
+            setY(GameLogic.HEIGHT-getRadius());
             velocity.reflect(new Vector2(0, 1));
         }
 
