@@ -40,14 +40,22 @@ public class SwingRenderInfo extends RenderInfo
     }
 
     // Converts GameLogic style coordinates to Swing style ones
-    private static int convertX(double x)
+    private int convertX(double x)
     {
         return (int)Math.round(x);
     }
 
-    private static int convertY(double y)
+    private int convertY(double y)
     {
-        return convertX(GameLogic.HEIGHT - y);
+        //return convertX(GameLogic.HEIGHT - y);
+
+        double ret = y;
+        // Account for the fact that Image's origin in on the top
+        ret += Game.getHeightOfSprite(sprite);
+        // Account for the fact that JPanel's origin is on the top
+        ret = GameLogic.HEIGHT - ret;
+        // Round
+        return convertX(ret);
     }
 
 
