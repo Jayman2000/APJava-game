@@ -1,5 +1,7 @@
 import java.awt.event.KeyEvent;
 
+import java.util.Arrays;
+
 public class Player implements Renderable, Entity, Controllable
 {
     private static final double SPEED = 1;
@@ -38,9 +40,7 @@ public class Player implements Renderable, Entity, Controllable
          * it. The objects themselves are not cloned, but this does not matter
          * since the only signals we care about are enums which are imutable.
          */
-        inputs = new Object[signals.length];
-        for(int i = 0; i < signals.length; i++)
-            inputs[i] = signals[i];
+        inputs = Arrays.copyOf(signals, signals.length);
     }
 
     public double getX()
