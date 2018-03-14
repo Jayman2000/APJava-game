@@ -91,9 +91,9 @@ public class Player implements Renderable, Entity, Controllable
         {
             setX(0);
         }
-        else if(getX() > GameLogic.WIDTH)
+        else if(getX()+Game.getWidthOfSprite(sprite) > GameLogic.WIDTH)
         {
-            setX(GameLogic.WIDTH);
+            setX(GameLogic.WIDTH-Game.getWidthOfSprite(sprite));
         }
     }
 }
