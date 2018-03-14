@@ -5,8 +5,8 @@ import java.util.Arrays;
 public class Player implements Renderable, Entity, Controllable
 {
     private static final double SPEED = 5.0/16.0;
-    private double x = 0;
-    private double y = 0;
+    private double x;
+    private double y;
     private Object[] inputs;
 
     private Object sprite;
@@ -21,6 +21,8 @@ public class Player implements Renderable, Entity, Controllable
 
     public Player()
     {
+        x = 0;
+        y = 0;
         inputs = new Object[0];
         sprite = Game.loadSprite("idle-new.png");
     }

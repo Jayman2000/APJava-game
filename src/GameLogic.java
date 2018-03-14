@@ -23,7 +23,9 @@ public class GameLogic
         }
         entities.add(new Ball(WIDTH/2.0, HEIGHT/2.0, 1, 1));
 
+        // NOTE: order matters for determining what is on top of what
         renderables = new ArrayList<Renderable>();
+        renderables.add(new Decoration("background.png"));
         for(Renderable r : entities)
         {
             renderables.add(r);

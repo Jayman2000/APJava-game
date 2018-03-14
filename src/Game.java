@@ -19,7 +19,7 @@ import javax.swing.Timer;
 
 public class Game extends JPanel implements JavaArcade, KeyListener, ActionListener
 {
-    private final static int frameTime = (int)Math.round(1.0/60.0 * 1000); // 24 fps
+    private final static int frameTime = (int)Math.round(1.0/24.0 * 1000); // 24 fps
     public Game()
     {
         // Input
@@ -208,13 +208,20 @@ public class Game extends JPanel implements JavaArcade, KeyListener, ActionListe
         return null;
     }
 
-    /* Note: apparently Image.getWidth() can return -1 if not all of the image
-     * has been loaded yet. How do we prevent that from happening?
+    /* Note: apparently Image.getWidth(), and getHeight() can return -1 if not
+     * all of the image has been loaded yet. How do we prevent that from
+     * happening?
      */
     public static int getWidthOfSprite(Object sprite)
     {
         Image spriteImage = (Image)sprite;
         return spriteImage.getWidth(null);
+    }
+
+    public static int getHeightOfSprite(Object sprite)
+    {
+        Image spriteImage = (Image)sprite;
+        return spriteImage.getHeight(null);
     }
 
     /* Returns a new SwingRenderInfo. This is needed for polymorphism. If we
