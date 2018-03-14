@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class Player implements Renderable, Entity, Controllable
 {
-    private static final double SPEED = 1;
+    private static final double SPEED = 5.0/16.0;
     private double x = 0;
     private double y = 0;
     private Object[] inputs;
@@ -27,9 +27,9 @@ public class Player implements Renderable, Entity, Controllable
 
     public Bind[] getBinds()
     {
-        Bind[] ret = new Bind[1];
-
-        ret[0] = new Bind(KeyEvent.VK_RIGHT, null, InputSignals.RIGHT);
+        Bind[] ret = {new Bind(KeyEvent.VK_LEFT, null, InputSignals.LEFT),
+                      new Bind(KeyEvent.VK_RIGHT, null, InputSignals.RIGHT)
+                     };
 
         return ret;
     }
@@ -78,8 +78,13 @@ public class Player implements Renderable, Entity, Controllable
             {
                 x += SPEED * deltaTime;
             }
+            else if(input == InputSignals.LEFT)
+            {
+                x -= SPEED * deltaTime;
+            }
         }
 
+        // Make sure the player cannot leave the playfield
         if(getX() < 0)
         {
             setX(0);

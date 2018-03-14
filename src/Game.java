@@ -19,7 +19,7 @@ import javax.swing.Timer;
 
 public class Game extends JPanel implements JavaArcade, KeyListener, ActionListener
 {
-    private final static int frameTime = (int)Math.round(1.0/24.0 * 1000); // 24 fps
+    private final static int frameTime = (int)Math.round(1.0/60.0 * 1000); // 24 fps
     public Game()
     {
         // Input
