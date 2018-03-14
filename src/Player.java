@@ -9,12 +9,18 @@ public class Player implements Renderable, Entity, Controllable
     private double y;
     private Object[] inputs;
 
-    private Object sprite;
+    private Object sprite; // The player's current sprite
+
+    private Object idle; // The player's idle sprite
+    private Animation walkLeft;
+    private Animation walkRight;
 
     private static enum InputSignals
     {
         LEFT,
+        START_LEFT,
         RIGHT,
+        START_RIGHT,
         MELEE,
         SHOOT
     }
@@ -24,13 +30,27 @@ public class Player implements Renderable, Entity, Controllable
         x = 0;
         y = 0;
         inputs = new Object[0];
-        sprite = Game.loadSprite("idle-new.png");
+        idle = Game.loadSprite("idle-new.png");
+
+        Object[] leftFrames = {Game.loadSprite("walking-left-1-new.png"),
+                               Game.loadSprite("walking-left-2-new.png"),
+                               Game.loadSprite("walking-left-3-new.png")
+                              };
+        walkLeft = new Animation(leftFrames, 100, true);
+
+        Object[] rightFrames = {Game.loadSprite("walking-right-1-new.png"),
+                                Game.loadSprite("walking-right-2-new.png"),
+                                Game.loadSprite("walking-right-3-new.png")
+                               };
+        walkRight = new Animation(rightFrames, 100, true);
+
+        sprite = idle;
     }
 
     public Bind[] getBinds()
     {
-        Bind[] ret = {new Bind(KeyEvent.VK_LEFT, null, InputSignals.LEFT),
-                      new Bind(KeyEvent.VK_RIGHT, null, InputSignals.RIGHT)
+        Bind[] ret = {new Bind(KeyEvent.VK_LEFT, InputSignals.START_LEFT, InputSignals.LEFT),
+                      new Bind(KeyEvent.VK_RIGHT, InputSignals.START_RIGHT, InputSignals.RIGHT)
                      };
 
         return ret;
@@ -74,15 +94,34 @@ public class Player implements Renderable, Entity, Controllable
 
     public void update(int deltaTime)
     {
+        if(inputs.length == 0)
+            idle();
+
         for(Object input : inputs)
         {
             if(input == InputSignals.RIGHT)
             {
                 x += SPEED * deltaTime;
+                walkRight.update(deltaTime);
+                sprite = walkRight.getCurrentFrame();
             }
             else if(input == InputSignals.LEFT)
             {
                 x -= SPEED * deltaTime;
+                walkLeft.update(deltaTime);
+                sprite = walkLeft.getCurrentFrame();
+            }
+            else if(input == InputSignals.START_LEFT)
+            {
+                walkLeft.reset();
+            }
+            else if(input == InputSignals.START_RIGHT)
+            {
+                walkRight.reset();
+            }
+            else
+            {
+                idle();
             }
         }
 
@@ -95,5 +134,10 @@ public class Player implements Renderable, Entity, Controllable
         {
             setX(GameLogic.WIDTH-Game.getWidthOfSprite(sprite));
         }
+    }
+
+    private void idle()
+    {
+        sprite = idle;
     }
 }
