@@ -118,7 +118,7 @@ public class GameLogic
         }
 
         OutputInfo ret =  new OutputInfo(retVisuals.toArray(new RenderInfo[retVisuals.size()]),
-                                         new Object[0], nextSong, b.getScore());
+                                         new Object[0], nextSong, b.getScore(), p.isDead());
         nextSong = null;
         return ret;
     }
