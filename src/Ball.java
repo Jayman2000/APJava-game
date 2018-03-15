@@ -79,6 +79,11 @@ public class Ball extends Circle implements Entity, Collidable
             score++;
     }
 
+    public void push(Circle pusher)
+    {
+        velocity.add(new Vector2(getX()-pusher.getX(), getY()-pusher.getY());
+    }
+
     public int getScore()
     {
         return score;

@@ -12,15 +12,13 @@ public class OutputInfo
                                * playing the current song on loop.
                                */
     public final int score;
-    public final boolean gameOver;
 
-    public OutputInfo(RenderInfo[] visuals, Object[] soundEffects, Object song, int score, boolean gameOver)
+    public OutputInfo(RenderInfo[] visuals, Object[] soundEffects, Object song, int score)
     {
         this.visuals = visuals;
         this.soundEffects = soundEffects;
         this.song = song;
         this.score = score;
-        this.gameOver = gameOver;
     }
 
     /*public OutputInfo(RenderInfo[] visuals, Object[] soundEffects, Object song)

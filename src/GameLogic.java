@@ -81,30 +81,33 @@ public class GameLogic
      */
     public OutputInfo update(Object[] inputSignals, int deltaTime)
     {
-        // Send signals
-        for(Controllable c : controllables)
+        if(!p.isDead())
         {
-            c.sendInputs(inputSignals);
-        }
-
-        // Update everything
-        for(Entity e : entities)
-        {
-            e.update(deltaTime);
-        }
-
-        // Check for collisions
-        for(Collidable a : collidables)
-        {
-            if(a.isColliding(b))
+            // Send signals
+            for(Controllable c : controllables)
             {
-                a.onCollision(b);
-                b.onCollision(a);
+                c.sendInputs(inputSignals);
             }
-        }
 
-        if(allClear())
-            resetTiles();
+            // Update everything
+            for(Entity e : entities)
+            {
+                e.update(deltaTime);
+            }
+
+            // Check for collisions
+            for(Collidable a : collidables)
+            {
+                if(a.isColliding(b))
+                {
+                    a.onCollision(b);
+                    b.onCollision(a);
+                }
+            }
+
+            if(allClear())
+                resetTiles();
+        }
 
         // Create the OutputInfo to return
         ArrayList<RenderInfo> retVisuals = new ArrayList<RenderInfo>(renderables.size());
@@ -118,7 +121,7 @@ public class GameLogic
         }
 
         OutputInfo ret =  new OutputInfo(retVisuals.toArray(new RenderInfo[retVisuals.size()]),
-                                         new Object[0], nextSong, b.getScore(), p.isDead());
+                                         new Object[0], nextSong, b.getScore());
         nextSong = null;
         return ret;
     }
