@@ -9,7 +9,7 @@ public class Tile extends Circle implements Collidable
         super(x, y, 0);
         sprite = Game.loadSprite("tile.png");
 
-        setRadius(Game.getWidthOfSprite(sprite));
+        setRadius(Game.getWidthOfSprite(sprite)/2.0);
 
         isDead = false;
     }
