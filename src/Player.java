@@ -139,7 +139,7 @@ public class Player implements Renderable, Entity, Controllable, Collidable
     public void death(Ball b)
     {
         if(this.isColliding(b))
-             /* enter death result */
+             setX(GameLogic.WIDTH/2.0);
     }
 
     private void idle()

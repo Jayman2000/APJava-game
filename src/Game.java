@@ -49,16 +49,13 @@ public class Game extends JPanel implements JavaArcade, KeyListener, ActionListe
         {
             binds.add(b);
         }
-
-        timer.start();
     }
 
     // Input
     //  JavaArcade
     public void startGame()
     {
-        /* start game */
-        public static int active;
+        timer.start();
     }
 
     public void pauseGame()
