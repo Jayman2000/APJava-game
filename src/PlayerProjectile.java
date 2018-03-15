@@ -3,11 +3,15 @@ public class PlayerProjectile extends Circle implements Collidable
 {
     private final Object sprite;
     public static final double SPEED = 5;
+
+    private boolean isDead;
+
     public PlayerProjectile(double x, double y)
     {
         super(x, y, 0);
         sprite = Game.loadSprite("player-projectile-new.png");
-		setX(Player.getX());
+        setRadius(Game.getWidthOfSprite(sprite));
+        isDead = false;
     }
 
     public RenderInfo[] getRenderInfo()
@@ -18,7 +22,7 @@ public class PlayerProjectile extends Circle implements Collidable
 
     public void update(int deltaTime)
     {
-        setY(getY()+SPEED);
+        setY(getY()+SPEED*deltaTime);
     }
 
     public boolean isColliding(Circle collidableOther)
@@ -28,8 +32,10 @@ public class PlayerProjectile extends Circle implements Collidable
     public void onCollision(Collidable other)
     {
         if(other instanceof Ball)
-        {
-            ball.push(this);
-        }
+            isDead = true;
+    }
+    public boolean isDead()
+    {
+        return isDead;
     }
 }
