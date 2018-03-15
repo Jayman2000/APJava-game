@@ -1,5 +1,6 @@
 import java.awt.event.KeyEvent;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Player implements Renderable, Entity, Controllable, Collidable
@@ -16,6 +17,8 @@ public class Player implements Renderable, Entity, Controllable, Collidable
     private Animation walkRight;
 
     private boolean isDead;
+
+    private ArrayList<PlayerProjectile> bullets;
 
     private static enum InputSignals
     {
@@ -49,13 +52,17 @@ public class Player implements Renderable, Entity, Controllable, Collidable
         sprite = idle;
 
         isDead = false;
+
+        bullets = new ArrayList<PlayerProjectile>();
     }
 
     public Bind[] getBinds()
     {
         Bind[] ret = {new Bind(KeyEvent.VK_LEFT, InputSignals.START_LEFT, InputSignals.LEFT),
-                      new Bind(KeyEvent.VK_RIGHT, InputSignals.START_RIGHT, InputSignals.RIGHT)
+                      new Bind(KeyEvent.VK_RIGHT, InputSignals.START_RIGHT, InputSignals.RIGHT),
+                      new Bind(KeyEvent.VK_Z, InputSignals.SHOOT, null)
                      };
+
 
         return ret;
     }
@@ -129,6 +136,10 @@ public class Player implements Renderable, Entity, Controllable, Collidable
                 else if(input == InputSignals.START_RIGHT)
                 {
                     walkRight.reset();
+                }
+                else if(input == InputSignals.SHOOT)
+                {
+                    bullets.add(new PlayerProjectile(getX() + Game.getWidthOfSprite(sprite)/2.0, Game.getHeightOfSprite(sprite)));
                 }
                 else
                 {
