@@ -66,22 +66,23 @@ public class Ball extends Circle implements Entity, Collidable
 
         velocity.add(GRAVITY);
         velocity.scl(Math.pow(FRICTION, deltaTime));
-
-        if(velocity.magnitude() < 0.25)
-        {
-            velocity = new Vector2(1,1);
-        }
     }
 
     public void onCollision(Collidable other)
     {
         if(other instanceof Tile)
+        {
             score++;
+            if(score >= GameLogic.SCORE_LIMIT)
+                score = GameLogic.SCORE_LIMIT-1;
+        }
     }
 
     public void push(Circle pusher)
     {
-        velocity.add(new Vector2(getX()-pusher.getX(), getY()-pusher.getY()));
+        Vector2 toAdd = new Vector2(getX()-pusher.getX(), getY()-pusher.getY());
+        toAdd.scl(1.0/32.0);
+        velocity.add(toAdd);
     }
 
     public int getScore()

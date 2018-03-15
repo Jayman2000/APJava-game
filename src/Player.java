@@ -100,9 +100,16 @@ public class Player implements Renderable, Entity, Controllable, Collidable
     {
         if(!isDead)
         {
-            RenderInfo[] ret = new RenderInfo[1];
-            ret[0] = Game.newRenderInfo(sprite, getX(), getY());
-            return ret;
+            ArrayList<RenderInfo> ret = new ArrayList<RenderInfo>();
+            ret.add(Game.newRenderInfo(sprite, getX(), getY()));
+            for(PlayerProjectile b : bullets)
+            {
+                for(RenderInfo r : b.getRenderInfo())
+                {
+                    ret.add(r);
+                }
+            }
+            return ret.toArray(new RenderInfo[ret.size()]);
         }
 
         return new RenderInfo[0];
@@ -146,7 +153,6 @@ public class Player implements Renderable, Entity, Controllable, Collidable
                     idle();
                 }
             }
-
         }
 
         // Make sure the player cannot leave the playfield
@@ -158,6 +164,13 @@ public class Player implements Renderable, Entity, Controllable, Collidable
         {
             setX(GameLogic.WIDTH-Game.getWidthOfSprite(sprite));
         }
+    }
+
+    public PlayerProjectile[] getBullets()
+    {
+        PlayerProjectile[] ret = bullets.toArray(new PlayerProjectile[bullets.size()]);
+        bullets.clear();
+        return ret;
     }
 
     public boolean isColliding(Circle collidableOther)

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class GameLogic
 {
+    public final static int SCORE_LIMIT = 999999999;
     public final static int WIDTH  = 600;
     public final static int HEIGHT = 450;
 
@@ -16,6 +17,7 @@ public class GameLogic
     private ArrayList<Collidable> collidables;
 
     private ArrayList<Tile> tiles;
+    private ArrayList<PlayerProjectile> bullets;
 
     private Object nextSong;
 
@@ -40,11 +42,11 @@ public class GameLogic
         collidables.add(b);
 
         entities = new ArrayList<Entity>();
-        for(Entity e : controllables)
+        for(Entity e : collidables)
         {
             entities.add(e);
         }
-        for(Entity e : collidables)
+        for(Entity e : controllables)
         {
             entities.add(e);
         }
@@ -60,6 +62,8 @@ public class GameLogic
         }
 
         //nextSong = Game.loadAudio("music.m4a");
+
+        bullets = new ArrayList<PlayerProjectile>();
     }
 
     /* Runs one 'tic' of game logic.
@@ -107,6 +111,26 @@ public class GameLogic
 
             if(allClear())
                 resetTiles();
+        }
+
+        for(PlayerProjectile b : p.getBullets())
+        {
+            bullets.add(b);
+            renderables.add(b);
+            entities.add(b);
+            collidables.add(b);
+        }
+
+        for(int i = bullets.size()-1; i >= 0; i--)
+        {
+            PlayerProjectile b = bullets.get(i);
+            if(b.isDead())
+            {
+                bullets.remove(i);
+                renderables.remove(b);
+                entities.remove(b);
+                collidables.remove(b);
+            }
         }
 
         // Create the OutputInfo to return
