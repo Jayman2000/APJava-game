@@ -68,7 +68,7 @@ public class Game extends JPanel implements JavaArcade, KeyListener, ActionListe
     {
         /* Stop timer */
         /* Reset score */
-        score = result.getPoints();
+        score = getPoints();
         timer.stop();
         currentSong.stop();
         currentSong = null;
@@ -133,7 +133,7 @@ public class Game extends JPanel implements JavaArcade, KeyListener, ActionListe
     }
 
     public String getCredits(){
-        return("A game by Jason, Jason, and Timmy. Inspired by \"東方靈異伝　～ The Highly Responsive to Prayers\"");
+        return("A game by Jason, Jason, and Timmy.");
     }
 
     public String getGameName(){
@@ -142,7 +142,7 @@ public class Game extends JPanel implements JavaArcade, KeyListener, ActionListe
 
     public String getHighScore()
     {
-        return ("999999999");
+        return Integer.toString(GameLogic.SCORE_LIMIT);
     }
 
     public int getPoints()

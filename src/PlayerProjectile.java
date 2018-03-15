@@ -2,7 +2,7 @@ public class PlayerProjectile extends Circle implements Collidable
 //PlayerProjectile by Timothy Retelle
 {
     private final Object sprite;
-    public static final double SPEED = 5;
+    public static final double SPEED = 3.0/8.0;
 
     private boolean isDead;
 
@@ -23,6 +23,10 @@ public class PlayerProjectile extends Circle implements Collidable
     public void update(int deltaTime)
     {
         setY(getY()+SPEED*deltaTime);
+        if(getY() - getRadius() > GameLogic.HEIGHT)
+        {
+            isDead = true;
+        }
     }
 
     public boolean isColliding(Circle collidableOther)
@@ -32,7 +36,11 @@ public class PlayerProjectile extends Circle implements Collidable
     public void onCollision(Collidable other)
     {
         if(other instanceof Ball)
+        {
             isDead = true;
+            Ball b = (Ball)other;
+            b.push(this);
+        }
     }
     public boolean isDead()
     {
