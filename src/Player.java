@@ -136,6 +136,21 @@ public class Player implements Renderable, Entity, Controllable, Collidable
         }
     }
 
+    public boolean isColliding(Circle collidableOther)
+    {
+        double centerX = x + Game.getWidthOfSprite(sprite)/2.0;
+        double centerY = y + Game.getHeightOfSprite(sprite)/2.0;
+
+        double r2 = collidableOther.getRadius();
+        r2 *= r2;
+        double x2 = centerX-collidableOther.getX();
+        x2 *= x2;
+        double y2 = centerY-collidableOther.getY();
+        y2 *= y2;
+
+        return r2 <= x2 + y2;
+    }
+
     public void death(Ball b)
     {
         if(this.isColliding(b))
