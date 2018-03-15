@@ -68,6 +68,7 @@ public class Game extends JPanel implements JavaArcade, KeyListener, ActionListe
     {
         /* Stop timer */
         /* Reset score */
+        score = result.getPoints();
         timer.stop();
         currentSong.stop();
         currentSong = null;
@@ -127,30 +128,23 @@ public class Game extends JPanel implements JavaArcade, KeyListener, ActionListe
         return timer.isRunning();
     }
 
-    public String getGameName()
-    {
-        // Stub
-        return "";
+    public String getInstructions(){
+        return("Don't get hit by the ball as it clears out the tiles! Use left and right to move.");
     }
-
-    public String getInstructions()
-    {
-        // Stub
-        return "";
+    
+    public String getCredits(){
+        return("A game by Jason, Jason, and Timmy.");
     }
-
-    public String getCredits()
-    {
-        // Stub
-        return "";
+    
+    public String getGameName(){
+        return ("Yours!!!");
     }
-
+    
     public String getHighScore()
     {
-        // Stub
-        return "0";
+        return ("999999999");
     }
-
+    
     public int getPoints()
     {
         return score;
