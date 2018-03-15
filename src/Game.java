@@ -131,20 +131,20 @@ public class Game extends JPanel implements JavaArcade, KeyListener, ActionListe
     public String getInstructions(){
         return("Don't get hit by the ball as it clears out the tiles! Use left and right to move.");
     }
-    
+
     public String getCredits(){
         return("A game by Jason, Jason, and Timmy.");
     }
-    
+
     public String getGameName(){
         return ("Yours!!!");
     }
-    
+
     public String getHighScore()
     {
         return ("999999999");
     }
-    
+
     public int getPoints()
     {
         return score;
