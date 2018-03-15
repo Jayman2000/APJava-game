@@ -196,8 +196,6 @@ public class Game extends JPanel implements JavaArcade, KeyListener, ActionListe
             renderInfos[i] = (SwingRenderInfo)result.visuals[i];
 
         score = result.score;
-        if(result.gameOver)
-            stopGame();
 
         if(result.song != null)
             changeSong((AudioClip)result.song);
