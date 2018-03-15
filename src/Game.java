@@ -61,14 +61,17 @@ public class Game extends JPanel implements JavaArcade, KeyListener, ActionListe
     public void pauseGame()
     {
         /* Stop timer */
-        active = -1;
+        timer.stop();
     }
 
     public void stopGame()
     {
         /* Stop timer */
         /* Reset score */
-        active = -1;
+        timer.stop();
+        currentSong.stop();
+        currentSong = null;
+        server = new GameLogic();
     }
 
 
@@ -118,10 +121,7 @@ public class Game extends JPanel implements JavaArcade, KeyListener, ActionListe
     //  JavaArcade
     public boolean running()
     {
-        if(active < 0)
-            return false;
-        else
-            return true;
+        return timer.isRunning();
     }
 
     public String getGameName()

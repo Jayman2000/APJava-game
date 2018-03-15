@@ -17,6 +17,11 @@ public class Ball extends Circle implements Entity, Collidable
         velocity = new Vector2(vectorX, vectorY);
     }
 
+    public boolean isColliding(Circle collidableOther)
+    {
+        return this.isTouching(collidableOther);
+    }
+
     public RenderInfo[] getRenderInfo()
     {
         RenderInfo[] ret = new RenderInfo[1];
