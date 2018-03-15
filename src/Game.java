@@ -57,17 +57,21 @@ public class Game extends JPanel implements JavaArcade, KeyListener, ActionListe
     //  JavaArcade
     public void startGame()
     {
-        // Stub
+        /* start game */
+        public static int active;
     }
 
     public void pauseGame()
     {
-        // Stub
+        /* Stop timer */
+        active = -1;
     }
 
     public void stopGame()
     {
-        // Stub
+        /* Stop timer */
+        /* Reset score */
+        active = -1;
     }
 
 
@@ -90,7 +94,7 @@ public class Game extends JPanel implements JavaArcade, KeyListener, ActionListe
     }
 
     // Methods required by KeyListener
-    public void keyTyped(KeyEvent e) { /* Intentiorally left empty */ }
+    public void keyTyped(KeyEvent e) { /* Intentionally left empty */ }
     public void keyPressed(KeyEvent e)
     {
         for(Bind b : binds)
@@ -117,8 +121,10 @@ public class Game extends JPanel implements JavaArcade, KeyListener, ActionListe
     //  JavaArcade
     public boolean running()
     {
-        // Stub
-        return false;
+        if(active < 0)
+            return false;
+        else
+            return true;
     }
 
     public String getGameName()
