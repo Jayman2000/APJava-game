@@ -9,4 +9,7 @@ Art:
     Player - drawn by Jason Yundt, based off of Nyx from Quake Champions by id Software
     Yin-Yang orb - from the first Touhou game
 
+Special Thanks:
+https://stackoverflow.com/questions/33257540/java-window-lagging-on-ubuntu-but-not-windows-when-code-isnt-lagging#33258929
+
 Inspired by 東方靈異伝　～ The Highly Responsive to Prayers by ZUN Soft

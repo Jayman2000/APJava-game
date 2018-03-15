@@ -47,8 +47,6 @@ public class SwingRenderInfo extends RenderInfo
 
     private int convertY(double y)
     {
-        //return convertX(GameLogic.HEIGHT - y);
-
         double ret = y;
         // Account for the fact that Image's origin in on the top
         ret += Game.getHeightOfSprite(sprite);

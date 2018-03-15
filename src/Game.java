@@ -13,6 +13,8 @@ import java.io.IOException;
 
 import java.util.ArrayList;
 
+import javafx.scene.media.AudioClip;
+
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -162,7 +164,9 @@ public class Game extends JPanel implements JavaArcade, KeyListener, ActionListe
     }
 
     //  Audio
+    private AudioClip currentSong;
 
+    //private void changeSong(
 
     // Processing
     //  Ticker
@@ -190,22 +194,33 @@ public class Game extends JPanel implements JavaArcade, KeyListener, ActionListe
 
     //  AssetManager
 
-    public static Image loadSprite(String name)
+    public static Image loadSprite(String filename)
     {
         Image sprite;
         try
         {
-            sprite = ImageIO.read(new File("assets", name));
+            sprite = ImageIO.read(stringToFile(filename));
             return sprite;
         }
         catch(IOException e)
         {
-            System.out.println("FATAL: Could not load sprite \"" + name + "\".");
+            System.out.println("FATAL: Could not load sprite \"" + filename + "\".");
             System.exit(0);
         }
 
         // This can never happen, but is needed prevent a compiler error.
         return null;
+    }
+
+    public static AudioClip loadAudio(String filename)
+    {
+        // Stub
+        return null;
+    }
+
+    private static File stringToFile(String filename)
+    {
+        return new File("assets", filename);
     }
 
     /* Note: apparently Image.getWidth(), and getHeight() can return -1 if not

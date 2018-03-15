@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class GameLogic
 {
-    public final static int WIDTH  = 640;
-    public final static int HEIGHT = 360;
+    public final static int WIDTH  = 600;
+    public final static int HEIGHT = 450;
 
     private ArrayList<Renderable> renderables;
     private ArrayList<Entity> entities;
