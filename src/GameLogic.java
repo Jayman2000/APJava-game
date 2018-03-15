@@ -7,23 +7,49 @@ public class GameLogic
     public final static int WIDTH  = 600;
     public final static int HEIGHT = 450;
 
+    Player p;
+    Ball b;
+
     private ArrayList<Renderable> renderables;
     private ArrayList<Entity> entities;
     private ArrayList<Controllable> controllables;
+    private ArrayList<Collidable> collidables;
+
+    private ArrayList<Tile> tiles;
 
     private Object nextSong;
 
     public GameLogic()
     {
+        p = new Player();
+        b = new Ball(WIDTH/2.0, HEIGHT/2.0, 1, 1);
+
+        tiles = new ArrayList<Tile>();
+        for(int x = 64; x < WIDTH-64; x += 32)
+            for(int y = 64; y < HEIGHT-64; y += 32)
+                tiles.add(new Tile(x, y));
+
         controllables = new ArrayList<Controllable>();
-        controllables.add(new Player());
+        controllables.add(p);
+
+        collidables = new ArrayList<Collidable>();
+        for(Collidable c : tiles)
+        {
+            collidables.add(c);
+        }
+        collidables.add(b);
 
         entities = new ArrayList<Entity>();
         for(Entity e : controllables)
         {
             entities.add(e);
         }
-        entities.add(new Ball(WIDTH/2.0, HEIGHT/2.0, 1, 1));
+        for(Entity e : collidables)
+        {
+            entities.add(e);
+        }
+
+        collidables.add(p); // Makes sure player isn't added to Entities twice
 
         // NOTE: order matters for determining what is on top of what
         renderables = new ArrayList<Renderable>();
@@ -67,6 +93,19 @@ public class GameLogic
             e.update(deltaTime);
         }
 
+        // Check for collisions
+        for(Collidable a : collidables)
+        {
+            if(a.isColliding(b))
+            {
+                a.onCollision(b);
+                b.onCollision(a);
+            }
+        }
+
+        if(allClear())
+            resetTiles();
+
         // Create the OutputInfo to return
         ArrayList<RenderInfo> retVisuals = new ArrayList<RenderInfo>(renderables.size());
 
@@ -79,7 +118,7 @@ public class GameLogic
         }
 
         OutputInfo ret =  new OutputInfo(retVisuals.toArray(new RenderInfo[retVisuals.size()]),
-                                         new Object[0], nextSong);
+                                         new Object[0], nextSong, b.getScore());
         nextSong = null;
         return ret;
     }
@@ -97,5 +136,20 @@ public class GameLogic
         }
 
         return ret.toArray(new Bind[ret.size()]);
+    }
+
+    private void resetTiles()
+    {
+        for(Tile t : tiles)
+            t.reset();
+    }
+
+    private boolean allClear()
+    {
+        for(Tile t : tiles)
+            if(!t.isDead())
+                return false;
+
+        return true;
     }
 }
