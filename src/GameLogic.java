@@ -11,6 +11,8 @@ public class GameLogic
     private ArrayList<Entity> entities;
     private ArrayList<Controllable> controllables;
 
+    private Object nextSong;
+
     public GameLogic()
     {
         controllables = new ArrayList<Controllable>();
@@ -30,6 +32,8 @@ public class GameLogic
         {
             renderables.add(r);
         }
+
+        nextSong = Game.loadAudio("music.m4a");
     }
 
     /* Runs one 'tic' of game logic.
@@ -74,7 +78,10 @@ public class GameLogic
             }
         }
 
-        return new OutputInfo(retVisuals.toArray(new RenderInfo[retVisuals.size()]));
+        OutputInfo ret =  new OutputInfo(retVisuals.toArray(new RenderInfo[retVisuals.size()]),
+                                         new Object[0], nextSong);
+        nextSong = null;
+        return ret;
     }
 
     public Bind[] getBinds()

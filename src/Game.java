@@ -166,7 +166,15 @@ public class Game extends JPanel implements JavaArcade, KeyListener, ActionListe
     //  Audio
     private AudioClip currentSong;
 
-    //private void changeSong(
+    private void changeSong(AudioClip next)
+    {
+        if(currentSong != null)
+            currentSong.stop();
+
+        currentSong = next;
+        currentSong.setCycleCount(AudioClip.INDEFINITE);
+        currentSong.play();
+    }
 
     // Processing
     //  Ticker
@@ -180,6 +188,9 @@ public class Game extends JPanel implements JavaArcade, KeyListener, ActionListe
         renderInfos = new SwingRenderInfo[result.visuals.length];
         for(int i = 0; i < result.visuals.length; i++)
             renderInfos[i] = (SwingRenderInfo)result.visuals[i];
+
+        if(result.song != null)
+            changeSong((AudioClip)result.song);
 
         repaint();
         // Work arround from https://stackoverflow.com/questions/33257540/java-window-lagging-on-ubuntu-but-not-windows-when-code-isnt-lagging#33258929
@@ -214,8 +225,7 @@ public class Game extends JPanel implements JavaArcade, KeyListener, ActionListe
 
     public static AudioClip loadAudio(String filename)
     {
-        // Stub
-        return null;
+        return new AudioClip(stringToFile(filename).toURI().toString());
     }
 
     private static File stringToFile(String filename)
