@@ -1,6 +1,6 @@
 import java.io.IOException;
 
-public class Ball extends Circle implements Entity
+public class Ball extends Circle implements Entity, Collidable
 {
     private Vector2 velocity; // Measured in units/ms
     private static final Vector2 GRAVITY = new Vector2(0, -0.01); // Aceleration due to gravity in units/ms^2

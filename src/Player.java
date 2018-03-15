@@ -2,7 +2,7 @@ import java.awt.event.KeyEvent;
 
 import java.util.Arrays;
 
-public class Player implements Renderable, Entity, Controllable
+public class Player implements Renderable, Entity, Controllable, Collidable
 {
     private static final double SPEED = 5.0/16.0;
     private double x;
