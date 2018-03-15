@@ -27,8 +27,7 @@ public class Arcade extends JFrame
 
     Container c = getContentPane();
     c.add(panel, BorderLayout.CENTER);
-  }
-
+    }
   public static void main(String[] args)
   {
     Arcade window = new Arcade();
