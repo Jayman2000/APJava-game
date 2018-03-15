@@ -129,11 +129,11 @@ public class Game extends JPanel implements JavaArcade, KeyListener, ActionListe
     }
 
     public String getInstructions(){
-        return("Don't get hit by the ball as it clears out the tiles! Use left and right to move.");
+        return("Don't get hit by the ball as you use it to clear out the tiles! Use left and right to move, use Z to shoot the ball and bounce it into the tiles.");
     }
 
     public String getCredits(){
-        return("A game by Jason, Jason, and Timmy.");
+        return("A game by Jason, Jason, and Timmy. Inspired by \"東方靈異伝　～ The Highly Responsive to Prayers\"");
     }
 
     public String getGameName(){
