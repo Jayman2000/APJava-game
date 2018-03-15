@@ -1,11 +1,13 @@
 public class PlayerProjectile extends Circle implements Collidable
+//PlayerProjectile by Timothy Retelle
 {
     private final Object sprite;
-
+    public static final double SPEED = 5;
     public PlayerProjectile(double x, double y)
     {
         super(x, y, 0);
         sprite = Game.loadSprite("player-projectile-new.png");
+		setX(Player.getX());
     }
 
     public RenderInfo[] getRenderInfo()
@@ -16,7 +18,7 @@ public class PlayerProjectile extends Circle implements Collidable
 
     public void update(int deltaTime)
     {
-
+        setY(getY()+SPEED);
     }
 
     public boolean isColliding(Circle collidableOther)
@@ -27,8 +29,7 @@ public class PlayerProjectile extends Circle implements Collidable
     {
         if(other instanceof Ball)
         {
-            //ball.push(getX(), getY());
-            System.out.println("Hit ball");
+            ball.push(this);
         }
     }
 }
