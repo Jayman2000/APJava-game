@@ -21,7 +21,7 @@ import javax.swing.Timer;
 
 public class Game extends JPanel implements JavaArcade, KeyListener, ActionListener
 {
-    private final static int frameTime = (int)Math.round(1.0/24.0 * 1000); // 24 fps
+    private final static int frameTime = (int)Math.round(1.0/60.0 * 1000); // 60 fps
     public Game()
     {
         // Input
@@ -119,6 +119,9 @@ public class Game extends JPanel implements JavaArcade, KeyListener, ActionListe
 
     // Output
     //  JavaArcade
+
+    private int score;
+
     public boolean running()
     {
         return timer.isRunning();
@@ -150,8 +153,7 @@ public class Game extends JPanel implements JavaArcade, KeyListener, ActionListe
 
     public int getPoints()
     {
-        // Stub
-        return 0;
+        return score;
     }
 
 
@@ -192,6 +194,8 @@ public class Game extends JPanel implements JavaArcade, KeyListener, ActionListe
         renderInfos = new SwingRenderInfo[result.visuals.length];
         for(int i = 0; i < result.visuals.length; i++)
             renderInfos[i] = (SwingRenderInfo)result.visuals[i];
+
+        score = result.score;
 
         if(result.song != null)
             changeSong((AudioClip)result.song);

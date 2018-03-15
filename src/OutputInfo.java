@@ -11,12 +11,19 @@ public class OutputInfo
     public final Object song; /* What song to change to. If null, continue
                                * playing the current song on loop.
                                */
+    public final int score;
 
-    public OutputInfo(RenderInfo[] visuals, Object[] soundEffects, Object song)
+    public OutputInfo(RenderInfo[] visuals, Object[] soundEffects, Object song, int score)
     {
         this.visuals = visuals;
         this.soundEffects = soundEffects;
         this.song = song;
+        this.score = score;
+    }
+
+    public OutputInfo(RenderInfo[] visuals, Object[] soundEffects, Object song)
+    {
+        this(visuals, soundEffects, song, 0);
     }
 
     public OutputInfo(RenderInfo[] visuals, Object[] soundEffects)

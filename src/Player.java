@@ -15,6 +15,8 @@ public class Player implements Renderable, Entity, Controllable, Collidable
     private Animation walkLeft;
     private Animation walkRight;
 
+    private boolean isDead;
+
     private static enum InputSignals
     {
         LEFT,
@@ -45,6 +47,8 @@ public class Player implements Renderable, Entity, Controllable, Collidable
         walkRight = new Animation(rightFrames, 100, true);
 
         sprite = idle;
+
+        isDead = false;
     }
 
     public Bind[] getBinds()
@@ -87,42 +91,51 @@ public class Player implements Renderable, Entity, Controllable, Collidable
 
     public RenderInfo[] getRenderInfo()
     {
-        RenderInfo[] ret = new RenderInfo[1];
-        ret[0] = Game.newRenderInfo(sprite, getX(), getY());
-        return ret;
+        if(!isDead)
+        {
+            RenderInfo[] ret = new RenderInfo[1];
+            ret[0] = Game.newRenderInfo(sprite, getX(), getY());
+            return ret;
+        }
+
+        return new RenderInfo[0];
     }
 
     public void update(int deltaTime)
     {
-        if(inputs.length == 0)
-            idle();
-
-        for(Object input : inputs)
+        if(!isDead)
         {
-            if(input == InputSignals.RIGHT)
-            {
-                x += SPEED * deltaTime;
-                walkRight.update(deltaTime);
-                sprite = walkRight.getCurrentFrame();
-            }
-            else if(input == InputSignals.LEFT)
-            {
-                x -= SPEED * deltaTime;
-                walkLeft.update(deltaTime);
-                sprite = walkLeft.getCurrentFrame();
-            }
-            else if(input == InputSignals.START_LEFT)
-            {
-                walkLeft.reset();
-            }
-            else if(input == InputSignals.START_RIGHT)
-            {
-                walkRight.reset();
-            }
-            else
-            {
+            if(inputs.length == 0)
                 idle();
+
+            for(Object input : inputs)
+            {
+                if(input == InputSignals.RIGHT)
+                {
+                    x += SPEED * deltaTime;
+                    walkRight.update(deltaTime);
+                    sprite = walkRight.getCurrentFrame();
+                }
+                else if(input == InputSignals.LEFT)
+                {
+                    x -= SPEED * deltaTime;
+                    walkLeft.update(deltaTime);
+                    sprite = walkLeft.getCurrentFrame();
+                }
+                else if(input == InputSignals.START_LEFT)
+                {
+                    walkLeft.reset();
+                }
+                else if(input == InputSignals.START_RIGHT)
+                {
+                    walkRight.reset();
+                }
+                else
+                {
+                    idle();
+                }
             }
+
         }
 
         // Make sure the player cannot leave the playfield
@@ -148,13 +161,18 @@ public class Player implements Renderable, Entity, Controllable, Collidable
         double y2 = centerY-collidableOther.getY();
         y2 *= y2;
 
-        return r2 <= x2 + y2;
+        return r2 >= x2 + y2;
     }
 
-    public void death(Ball b)
+    public void onCollision(Collidable other)
     {
-        if(this.isColliding(b))
-             setX(GameLogic.WIDTH/2.0);
+        if(other instanceof Ball)
+            isDead = true;
+    }
+
+    public boolean isDead()
+    {
+        return isDead;
     }
 
     private void idle()

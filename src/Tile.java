@@ -2,6 +2,7 @@
 public class Tile extends Circle implements Collidable
 {
     private Object sprite;
+    private boolean isDead;
 
     public Tile(double x, double y)
     {
@@ -9,6 +10,8 @@ public class Tile extends Circle implements Collidable
         sprite = Game.loadSprite("tile.png");
 
         setRadius(Game.getWidthOfSprite(sprite));
+
+        isDead = false;
     }
 
     public RenderInfo[] getRenderInfo()
@@ -16,15 +19,6 @@ public class Tile extends Circle implements Collidable
         RenderInfo[] ret = new RenderInfo[1];
         ret[0] = Game.newRenderInfo(sprite, getX()-getRadius(), getY()-getRadius());
         return ret;
-    }
-
-    public void collision(Ball b)
-    {
-        if(this.isColliding(b))
-        {
-            sprite = Game.loadSprite("tile2.png");
-            /* Add point */
-        }
     }
 
     public void update(int deltaTime)
@@ -35,5 +29,25 @@ public class Tile extends Circle implements Collidable
     public boolean isColliding(Circle collidableOther)
     {
         return this.isTouching(collidableOther);
+    }
+
+    public void onCollision(Collidable other)
+    {
+        if(other instanceof Ball)
+        {
+            sprite = Game.loadSprite("tile2.png");
+            isDead = true;
+        }
+    }
+
+    public boolean isDead()
+    {
+        return isDead;
+    }
+
+    public void reset()
+    {
+        sprite = Game.loadSprite("tile.png");
+        isDead = false;
     }
 }

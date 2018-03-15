@@ -8,6 +8,8 @@ public class Ball extends Circle implements Entity, Collidable
 
     private final Object sprite;
 
+    private int score;
+
     public Ball(double centerX, double centerY, double vectorX, double vectorY)
     {
         super(centerX, centerY, 0);
@@ -15,6 +17,8 @@ public class Ball extends Circle implements Entity, Collidable
         setRadius(Game.getWidthOfSprite(sprite)/2.0); // Assuming sprite is a square
 
         velocity = new Vector2(vectorX, vectorY);
+
+        score = 0;
     }
 
     public boolean isColliding(Circle collidableOther)
@@ -62,5 +66,16 @@ public class Ball extends Circle implements Entity, Collidable
 
         velocity.add(GRAVITY);
         velocity.scl(Math.pow(FRICTION, deltaTime));
+    }
+
+    public void onCollision(Collidable other)
+    {
+        if(other instanceof Tile)
+            score++;
+    }
+
+    public int getScore()
+    {
+        return score;
     }
 }
