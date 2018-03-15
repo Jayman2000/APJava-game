@@ -55,7 +55,7 @@ public class GameLogic
 
         // NOTE: order matters for determining what is on top of what
         renderables = new ArrayList<Renderable>();
-        renderables.add(new Decoration("background.png"));
+        renderables.add(new Decoration("background.png", 0, -4));
         for(Renderable r : entities)
         {
             renderables.add(r);
