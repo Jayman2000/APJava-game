@@ -68,7 +68,7 @@ public class Ball extends Circle implements Entity, Collidable
         }
 
         velocity.add(GRAVITY);
-        velocity.scl(Math.pow(FRICTION, deltaTime * 1.25 * level));
+        velocity.scl(Math.pow(FRICTION, deltaTime * (9.0/8.0) * level));
     }
 
     public void onCollision(Collidable other)
