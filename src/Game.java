@@ -52,7 +52,7 @@ public class Game extends JPanel implements JavaArcade, KeyListener, ActionListe
     }
 
     // Input
-    //  JavaArcade
+    //  JavaArcade (Author: Timmy Retelle)
     public void startGame()
     {
         timer.start();
@@ -76,7 +76,7 @@ public class Game extends JPanel implements JavaArcade, KeyListener, ActionListe
     }
 
 
-    //  Keyboard
+    //  Keyboard (Author: Jason Yundt)
     private ArrayList<Bind> binds;
 
     public Object[] getSignals()
@@ -119,7 +119,7 @@ public class Game extends JPanel implements JavaArcade, KeyListener, ActionListe
 
 
     // Output
-    //  JavaArcade
+    //  JavaArcade (Author: Timmy Retelle)
 
     private int score;
 
@@ -151,7 +151,7 @@ public class Game extends JPanel implements JavaArcade, KeyListener, ActionListe
     }
 
 
-    //  Visual
+    //  Visual (Author: Timmy Retelle)
     private SwingRenderInfo[] renderInfos;
     public void paintComponent(Graphics g)
     {
@@ -162,7 +162,7 @@ public class Game extends JPanel implements JavaArcade, KeyListener, ActionListe
         }
     }
 
-    //  Audio
+    //  Audio (Author: Jason Yundt)
     private AudioClip currentSong;
 
     private void changeSong(AudioClip next)
@@ -177,7 +177,7 @@ public class Game extends JPanel implements JavaArcade, KeyListener, ActionListe
     }
 
     // Processing
-    //  Ticker
+    //  Ticker (Author: Jason O'Dwyer)
     private Timer timer;
 
     // Called every tic
@@ -205,7 +205,7 @@ public class Game extends JPanel implements JavaArcade, KeyListener, ActionListe
     private GameLogic server;
 
 
-    //  AssetManager
+    //  AssetManager (Author: Jason O'Dwyer
 
     public static Image loadSprite(String filename)
     {
