@@ -168,6 +168,7 @@ public class GameLogic
 
     private void resetTiles()
     {
+        b.levelUp();
         for(Tile t : tiles)
             t.reset();
     }
