@@ -1,5 +1,6 @@
 import java.io.IOException;
 
+// Author: Jason Yundt, Timmy Retelle
 public class Ball extends Circle implements Entity, Collidable
 {
     private Vector2 velocity; // Measured in units/ms

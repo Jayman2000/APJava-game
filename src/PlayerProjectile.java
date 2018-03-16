@@ -1,5 +1,6 @@
+// Author: Timothy Retelle
+
 public class PlayerProjectile extends Circle implements Collidable
-//PlayerProjectile by Timothy Retelle
 {
     private final Object sprite;
     public static final double SPEED = 3.0/8.0;

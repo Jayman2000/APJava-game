@@ -1,3 +1,5 @@
+// Author: Jason O'Dwyer
+
 public interface Collidable extends Entity
 {
     public boolean isColliding(Circle collidableOther);

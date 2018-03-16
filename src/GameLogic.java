@@ -2,6 +2,7 @@ import java.awt.Image;
 
 import java.util.ArrayList;
 
+// Author: Jason Yundt
 public class GameLogic
 {
     public final static int SCORE_LIMIT = 999999999;
