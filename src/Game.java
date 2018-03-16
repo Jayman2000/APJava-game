@@ -10,6 +10,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.File;
 import java.io.IOException;
 
@@ -24,6 +27,9 @@ import javax.swing.Timer;
 public class Game extends JPanel implements JavaArcade, KeyListener, ActionListener
 {
     private final static int frameTime = (int)Math.round(1.0/60.0 * 1000); // 60 fps
+    private BufferedReader reader;
+    private FileWriter writer;
+
     public Game()
     {
         // Input
@@ -139,12 +145,56 @@ public class Game extends JPanel implements JavaArcade, KeyListener, ActionListe
     }
 
     public String getGameName(){
-        return ("Yours!!!");
+        return("Yours!!!");
     }
 
     public String getHighScore()
     {
-        return Integer.toString(GameLogic.SCORE_LIMIT);
+        try
+        {
+            reader = new BufferedReader(new FileReader(“/Users/JasonODwyer/Documents/APJava-game”)
+        }
+        catch(FileNotFoundException e)
+        {
+            e.printStacktrace();
+        }
+
+        String unparsed = “”+0;
+        int score;
+        int points = 5; //sample points variable, find real points variable later
+
+        try
+        {
+            unparsed = reader.readLine();
+            score = Integer.parseInt(unparsed);
+            reader.close();
+        }
+        catch(IOException e)
+        {
+            return unparsed;
+        }
+
+        if(score < points)
+        {
+            try
+            {
+                writer = new FileWriter(/Users/JasonODwyer/Documents/APJava-game)
+            }
+            catch(IOException e);
+            {
+                e.printStackTrace();
+            }
+            try
+            {
+                writer.write(points+””;
+                writer.close();
+            }
+            catch(IOException e)
+            {
+                e.printStackTrace();
+            }
+
+            return unparsed;
     }
 
     public int getPoints()
