@@ -75,7 +75,7 @@ public class Ball extends Circle implements Entity, Collidable
     {
         if(other instanceof Tile)
         {
-            if(!(Tile)other.isDead())
+            if(!((Tile)other).isDead())
                 score++;
 
             if(score >= GameLogic.SCORE_LIMIT)
