@@ -78,7 +78,8 @@ public class Game extends JPanel implements JavaArcade, KeyListener, ActionListe
         /* Reset score */
         score = getPoints();
         timer.stop();
-        currentSong.stop();
+        if(currentSong != null)
+            currentSong.stop();
         currentSong = null;
         server = new GameLogic();
     }
