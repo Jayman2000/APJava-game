@@ -4,6 +4,7 @@ public class Tile extends Circle implements Collidable
 {
     private Object sprite;
     private boolean isDead;
+    private boolean hasGivenPoints;
 
     public Tile(double x, double y)
     {
@@ -13,6 +14,7 @@ public class Tile extends Circle implements Collidable
         setRadius(Game.getWidthOfSprite(sprite)/2.0);
 
         isDead = false;
+        hasGivenPoints = false;
     }
 
     public RenderInfo[] getRenderInfo()
@@ -44,6 +46,13 @@ public class Tile extends Circle implements Collidable
     public boolean isDead()
     {
         return isDead;
+    }
+
+    public boolean hasGivenPoints()
+    {
+        boolean ret = hasGivenPoints;
+        hasGivenPoints = true;
+        return ret;
     }
 
     public void reset()
