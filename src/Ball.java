@@ -10,6 +10,7 @@ public class Ball extends Circle implements Entity, Collidable
     private final Object sprite;
 
     private int score;
+    private int level;
 
     public Ball(double centerX, double centerY, double vectorX, double vectorY)
     {
@@ -20,6 +21,7 @@ public class Ball extends Circle implements Entity, Collidable
         velocity = new Vector2(vectorX, vectorY);
 
         score = 0;
+        level = 0;
     }
 
     public boolean isColliding(Circle collidableOther)
@@ -66,7 +68,7 @@ public class Ball extends Circle implements Entity, Collidable
         }
 
         velocity.add(GRAVITY);
-        velocity.scl(Math.pow(FRICTION, deltaTime));
+        velocity.scl(Math.pow(FRICTION, deltaTime * (9.0/8.0) * level));
     }
 
     public void onCollision(Collidable other)
@@ -89,5 +91,10 @@ public class Ball extends Circle implements Entity, Collidable
     public int getScore()
     {
         return score;
+    }
+
+    public void levelUp()
+    {
+        level++;
     }
 }

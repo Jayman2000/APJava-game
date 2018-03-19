@@ -25,7 +25,7 @@ public class GameLogic
     public GameLogic()
     {
         p = new Player();
-        b = new Ball(WIDTH/2.0, HEIGHT/2.0, 1, 1);
+        b = new Ball(WIDTH/2.0, HEIGHT/2.0, (1.0/2.0), (1.0/2.0));
 
         tiles = new ArrayList<Tile>();
         for(int x = 64; x < WIDTH-64; x += 32)
@@ -168,6 +168,7 @@ public class GameLogic
 
     private void resetTiles()
     {
+        b.levelUp();
         for(Tile t : tiles)
             t.reset();
     }
