@@ -11,9 +11,10 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.File;
 import java.io.IOException;
 
 import java.util.ArrayList;
@@ -29,6 +30,8 @@ public class Game extends JPanel implements JavaArcade, KeyListener, ActionListe
     private final static int frameTime = (int)Math.round(1.0/60.0 * 1000); // 60 fps
     private BufferedReader reader;
     private FileWriter writer;
+
+    private final static File HIGH_SCORE_FILE = new File("highscore.txt");
 
     public Game()
     {
@@ -151,51 +154,63 @@ public class Game extends JPanel implements JavaArcade, KeyListener, ActionListe
 
     public String getHighScore()
     {
+        System.out.println("calling getHighScore()");
         try
         {
-            reader = new BufferedReader(new FileReader(“/Users/JasonODwyer/Documents/APJava-game”)
+            HIGH_SCORE_FILE.createNewFile();
+            reader = new BufferedReader(new FileReader(HIGH_SCORE_FILE));
         }
         catch(FileNotFoundException e)
         {
-            e.printStacktrace();
-        }
-
-        String unparsed = “”+0;
-        int score;
-        int points = 5; //sample points variable, find real points variable later
-
-        try
-        {
-            unparsed = reader.readLine();
-            score = Integer.parseInt(unparsed);
-            reader.close();
+            e.printStackTrace();
         }
         catch(IOException e)
         {
-            return unparsed;
+            e.printStackTrace();
         }
 
-        if(score < points)
+        String unparsed = ""+0;
+        int highScore = -1;
+
+        if(reader != null)
         {
             try
             {
-                writer = new FileWriter(/Users/JasonODwyer/Documents/APJava-game)
+                unparsed = reader.readLine();
+                if(unparsed != null)
+                    highScore = Integer.parseInt(unparsed);
+                else
+                    unparsed = "0";
+                reader.close();
             }
-            catch(IOException e);
+            catch(IOException e)
+            {
+                return unparsed;
+            }
+        }
+
+        if(highScore < score)
+        {
+            try
+            {
+                writer = new FileWriter(HIGH_SCORE_FILE);
+            }
+            catch(IOException e)
             {
                 e.printStackTrace();
             }
             try
             {
-                writer.write(points+””;
+                writer.write(score+"");
                 writer.close();
             }
             catch(IOException e)
             {
                 e.printStackTrace();
             }
+        }
 
-            return unparsed;
+        return unparsed;
     }
 
     public int getPoints()
