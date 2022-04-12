@@ -168,12 +168,13 @@ public class Game extends JPanel implements JavaArcade, KeyListener, ActionListe
 
     private void changeSong(AudioClip next)
     {
-        if(currentSong != null)
+        // Uncomment this when we have a song.
+        /*if(currentSong != null)
             currentSong.stop();
 
         currentSong = next;
         currentSong.setCycleCount(AudioClip.INDEFINITE);
-        currentSong.play();
+        currentSong.play();*/
     }
 
     // Processing

@@ -33,7 +33,7 @@ public class GameLogic
             renderables.add(r);
         }
 
-        nextSong = Game.loadAudio("music.m4a");
+        //nextSong = Game.loadAudio("music.m4a");
     }
 
     /* Runs one 'tic' of game logic.
