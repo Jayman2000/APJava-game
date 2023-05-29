@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 ./build.sh
 if [ -d "dist" ]; then
